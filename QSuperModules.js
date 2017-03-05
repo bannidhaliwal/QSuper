@@ -35,7 +35,7 @@ var Router = function(request,response,server){
 }//end Router
 //Helper method of Router Function
 function sliceString(string){
-  string = string.slice(1);
+  string = string.slice(1);//Remove first letter which is /
   string = string.toLowerCase();
   return string;
 }//End Slice String
