@@ -1,7 +1,7 @@
 //Require Socket.io for real time synchornisation
 //Require ejs for templating
 //Require express for serving files
-var PORT = 3000;
+var PORT = process.env.PORT || 8080;
 var express = require ('express');
 var server = express();
 
@@ -12,4 +12,4 @@ server.get('/',function(req,res){
 });
 
 server.listen(PORT);
-console.log("This application is listening on" +PORT);
+console.log("This application is listening on " +PORT);
