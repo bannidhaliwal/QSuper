@@ -24,5 +24,6 @@
      "ejs":"latest",
      "socket.io":"latest",
      "express":"latest"
-  }
+  },
+  "start":"node app.js"
 }
