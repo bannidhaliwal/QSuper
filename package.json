@@ -1,0 +1,28 @@
+{
+  "name": "q-super",
+  "version": "0.0.1",
+  "description": "This project involves creating a dynamic website for Q-Super and a game version of Super annuation process.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bannidhaliwal/QSuper.git"
+  },
+  "keywords": [
+    "Q-Super",
+    "Gamification-of-Q-Super"
+  ],
+  "author": "Banni",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bannidhaliwal/QSuper/issues"
+  },
+  "homepage": "https://github.com/bannidhaliwal/QSuper#readme",
+  "dependencies":{
+     "ejs":"latest",
+     "socket.io":"latest",
+     "express":"latest"
+  }
+}
