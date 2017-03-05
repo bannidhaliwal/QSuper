@@ -1,14 +1,14 @@
-//Require Socket.io for real time synchornisation
-//Require ejs for templating
-//Require express for serving files
-var PORT = process.env.PORT || 8080;
+//This file is the main entry point for
+//Q_Super Project.
+//@author: Banni
 var express = require ('express');
 var server = express();
-
+var PORT = process.env.PORT || 8080;
+var routes = require('./QSuperModules.js');
 server.set("view engine","ejs");
-
-server.get('/',function(req,res){
-  res.render('test.ejs');
+//Middleware for routing
+server.use(function(req,res){
+  routes.Router(req,res,server);
 });
 
 server.listen(PORT);
