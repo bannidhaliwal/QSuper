@@ -23,7 +23,9 @@
   "dependencies":{
      "ejs":"latest",
      "socket.io":"latest",
-     "express":"latest"
+     "express":"latest",
+     "mysql":"latest",
+     "body-parser":"latest"
   },
   "start":"node app.js"
 }
