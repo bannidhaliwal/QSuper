@@ -8,7 +8,7 @@ var PORT = process.env.PORT || 8080;
 var mySql = require('mysql');
 var localModules = require('./QSuperModules.js');
 server.set("view engine","ejs");
-
+server.use(express.static('public'));
 server.use(bodyParser.urlencoded({ extended: true }));
 //Middleware for routing
 server.use(function(req,res){

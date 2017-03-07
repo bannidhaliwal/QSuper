@@ -9,7 +9,7 @@ var Router = function(request,response,server,mySqlObject){
   var paths = {HomePage:"homepage",About:"about",PrivacyPolicy:"privacypolicy",GamePage:"gamepage",Login:"login"}; //Pages of Q-Super
   var URL = request.originalUrl; //get URl
   if(request.method === "GET"){
-    //remove the leading character
+    //remove the leading character before switching
     switch(sliceString(URL)){
       case paths["HomePage"]:{
         response.render(paths["HomePage"]+".ejs");
@@ -31,6 +31,10 @@ var Router = function(request,response,server,mySqlObject){
         response.render(paths["Login"]);
         break;
       }
+      case '/':{
+        response.render(paths['HomePage']);
+        break;
+      }
       default:{
         response.render("notFound.ejs"); //If nothing matches, Redirect to notFound.ejs
         break;
@@ -50,6 +54,7 @@ var Router = function(request,response,server,mySqlObject){
 }//end router
 //Helper method of Router Function
 function sliceString(string){
+  if(string.length == 1){return string;}
   string = string.slice(1);//Remove first letter which is '/'
   string = string.toLowerCase();
   return string;

@@ -1,0 +1,17 @@
+body{
+  min-width: 500px;
+}
+
+.navbar{
+  margin-top: 30px;
+}
+.navbar-brand{
+  color: royalblue;
+  font-size: 5em;
+}
+.nav{
+  margin-left:20px;
+}
+.containerExtension{
+  margin-top:20px;
+}
