@@ -101,6 +101,13 @@ var MySqlConnection = function(mySqlObject,queryArg,callback){
       }//end if(query !== "undefined")
     }//end else
   });//end outer connection query
+
+  //Server drops the connection after some time
+  //due to sitting idle. When connection send an error
+  //We try to reconnect with recursive call.
+  connection.on('error',function(){
+    MySqlConnection(mySqlObject,queryArg,callback);
+  });
 }
 module.exports.Router = Router;
 module.exports.MySqlConnection = MySqlConnection;

@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
+@import url('https://fonts.googleapis.com/css?family=Inconsolata|Pridi');
 body{
-  min-width: 500px;
+  min-width: 800px;
 }
 
 .navbar{
@@ -12,6 +14,38 @@ body{
 .nav{
   margin-left:20px;
 }
-.containerExtension{
+.containerExtensionForNavBar{
   margin-top:20px;
+}
+.containerExtensionForContentArea{
+  margin-top:2%;
+  width:100%;
+  height:70%;
+  background-color:royalblue;
+}
+.innerContainerOfContentArea{
+  margin-top:10%;
+  height:50%;
+  width:40%;
+  margin-left:2%;
+  min-width:200px;
+  color:white;
+  font-family: 'Inconsolata', monospace;
+  float:left;
+}
+.playButton{
+  color:white;
+  background-color: royalblue;
+  padding:8px 8px;
+  font-family: 'Pridi', serif;
+  border-radius: 8px;
+  //border:none;
+  border-width:1px;
+  border-color:ghostwhite;
+  font-size: 1.2em;
+}
+.playButton:hover{
+  background-color: white;
+  color:royalblue;
+  border:none;
 }
