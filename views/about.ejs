@@ -1,8 +1,27 @@
 <html>
   <head>
+    <!-- This ejs statement includes header partial.
+    Varibale declaration decides which page is active !-->
     <% include head.ejs %>
+    <% var page = 'about'%>
+    <% var active = " active"%>
   </head>
   <body>
     <% include header.ejs %>
+    <div class = "container" style="height:300px;width:50%;color:#2A9FD8;margin-left:10%;margin-top:5%;">
+    <h1> What is Super?<h1>
+      <p style="color:black;font-size:0.5em;">
+        Superannuation is a way to save up for your retirement days.
+        The money will comes from contributions that are made into your super fund by your
+        employer and ideally by your own money. You can get other benefits, such as co-contribution
+        that are added by the government and the low income super contribution.
+        The rule is that your employer must give Super Guarantee by contributing 9.5% of
+        your salary to a super fund. The Super Guarantee rate will gradually increase to 12% in coming years.
+        As time goes on, these contributions that comes from your employer and your own money
+        will add up. Your super money is also used by super fund to invest to other things so it grows over
+        time. When you reached the age of retirement, you will have money to live off. Super is a lifetime investment
+        that gives you many benefits and security.
+      </p>
+    </div>
   </body>
 </html>

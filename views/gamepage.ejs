@@ -1,8 +1,26 @@
 <html>
   <head>
+    <!-- This ejs statement includes header partial.
+    Varibale declaration decides which page is active !-->
     <% include head.ejs %>
+    <% var page = 'gamepage'%>
+    <% var active = " active"%>
   </head>
   <body>
     <% include header.ejs %>
+    <canvas id = "canvas" width="1000" height = "1000" style="border:1px solid #c3c3c3;"></canvas>
   </body>
 </html>
+
+<!--
+For Game we need to draw Images on canvas. However, Canvas in HTML
+does not support access to child elements of any drawn object, we have
+to create a wrapper class for that purpose. In wrapper class we need functions
+such as:
+var id; //id of object.
+var currentX;
+var currentY;
+drawObject(x,y,length,height); //function to draw object on canvas.
+swapObject(id,id2);
+clearObject();//function to clear element from current position.
+!-->

@@ -1,3 +1,5 @@
+<!-- This page refer to the header of all pages.
+!-->
 <nav class="navbar">
 <div class="container">
   <div class="navbar-header">
@@ -9,11 +11,39 @@
 </nav>
 <div class="container containerExtensionForNavBar">
   <ul class="nav nav-tabs" role="tablist">
-    <li class="active"><a href="homepage">Home</a></li>
-    <li><a href="/login">Login</a></li>
-    <li><a href="/register">Register</a></li>
-    <li><a href="/about">About Super</a></li>
-    <li><a href="/contactus"> Contact Us</a> </li>
-    <li><a href="/gamepage">Play Game</a></li>
+    <!--This if statements check which varibale is set.
+    page varibale refer to current active page. For more
+    information check ejs pages. E.G->login.ejs
+    !-->
+    <% if(page === 'homepage'){%><li class =" <%=active%>"><%}%>
+    <% if(page != 'homepage'){%><li><%}%>
+      <a href="homepage">Home</a>
+    </li>
+
+    <% if(page === 'login'){%><li class =" <%=active%>"><%}%>
+    <% if(page != 'login'){%><li><%}%>
+      <a href="/login">Login</a>
+    </li>
+
+    <% if(page === 'register'){%><li class =" <%=active%>"><%}%>
+    <% if(page != 'register'){%><li><%}%>
+      <a href="/register">Register</a>
+    </li>
+
+    <% if(page === 'about'){%><li class =" <%=active%>"><%}%>
+    <% if(page != 'about'){%><li><%}%>
+      <a href="/about">About Super</a>
+    </li>
+
+
+    <% if(page === 'contactus'){%><li class =" <%=active%>"><%}%>
+    <% if(page != 'contactus'){%><li><%}%>
+      <a href="/contactus"> Contact Us</a>
+    </li>
+
+    <% if(page === 'gamepage'){%><li class =" <%=active%>"><%}%>
+    <% if(page != 'gamepage'){%><li><%}%>
+      <a href="/gamepage">Play Game</a>
+    </li>
   </ul>
 </div>

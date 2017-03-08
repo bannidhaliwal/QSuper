@@ -1,3 +1,6 @@
+/* This is CSS file for Q-Super Project.
+@author:Banni
+*/
 @import url('https://fonts.googleapis.com/css?family=Inconsolata|Pridi');
 body{
   min-width: 800px;
@@ -61,11 +64,15 @@ body{
   padding:8px 8px;
   font-family: inherit;
   border:none;
-
   font-size: 1.2em;
 }
 .playButton:hover{
   text-decoration: underline;
   background-color: white;
   color:#2A9FD8;
+}
+.notFoundPage{
+  height:100%;
+  background-image:url('http://3.bp.blogspot.com/-_d6Vx1hSOGY/VTQCdEej5iI/AAAAAAAAATM/Fu5aBKq3U_Y/s1600/404.png');
+  background-size:cover;
 }

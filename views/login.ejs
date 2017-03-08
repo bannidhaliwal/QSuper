@@ -1,8 +1,13 @@
 <html>
   <head>
+    <!-- This ejs statement includes header partial.
+    Varibale declaration decides which page is active !-->
     <% include head.ejs %>
+    <% var page = 'login'%>
+    <% var active = " active"%>
   </head>
   <body>
     <% include header.ejs %>
   </body>
+
 </html>
