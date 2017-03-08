@@ -95,7 +95,7 @@ var MySqlConnection = function(mySqlObject,queryArg,callback){
             console.log(err);
           }
           else{
-            callback(results);
+            callback(results);//run the callback
           }
         });//end connection.query
       }//end if(query !== "undefined")
