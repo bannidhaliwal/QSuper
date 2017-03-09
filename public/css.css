@@ -4,7 +4,9 @@
 @import url('https://fonts.googleapis.com/css?family=Inconsolata|Pridi');
 body{
   min-width: 800px;
+  min-height:1000px;
 }
+/*Header*/
 .headerLogo{
   width:auto;
   height:auto;
@@ -23,13 +25,15 @@ body{
 .containerExtensionForNavBar{
   margin-top:20px;
 }
-.containerExtensionForContentArea{
+/************************End header******************************/
+/*Content area*/
+.containerExtensionForContentArea{ /*Content area*/
   margin-top:2%;
   width:100%;
   height:70%;
   background-color:#2A9FD8;
 }
-.innerContainerOfContentArea{
+.innerContainerOfContentArea{ /*Home page*/
   margin-top:10%;
   height:50%;
   width:40%;
@@ -71,8 +75,24 @@ body{
   background-color: white;
   color:#2A9FD8;
 }
-.notFoundPage{
+/*End content area*//* End home area*/
+.notFoundPage{ /*Not found page*/
   height:100%;
   background-image:url('http://3.bp.blogspot.com/-_d6Vx1hSOGY/VTQCdEej5iI/AAAAAAAAATM/Fu5aBKq3U_Y/s1600/404.png');
   background-size:cover;
+}
+/*About page*/
+.aboutContentAreaContainer{
+  width:50%;
+  height:20%;
+  color:#2A9FD8;
+  margin-left:10%;
+  margin-top:5%;
+  border-bottom: solid;
+  border-width:1px;
+}
+.aboutContentAreaContainer p{
+  color:black;
+  font-size:1em;
+  line-height: 2;
 }

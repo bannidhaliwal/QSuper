@@ -6,7 +6,7 @@ var server = express();
 var bodyParser = require('body-parser');
 var PORT = process.env.PORT || 8080; //Let heroku decide which port to choose.
 var mySql = require('mysql');
-var localModules = require('./QSuperModules.js');//Load the local modules.
+var localModules = require('./lib/QSuperModules.js');//Load the local modules.
 server.set("view engine","ejs");
 server.use(express.static('public'));
 server.use(bodyParser.urlencoded({ extended: true })); //Not necessary ??
