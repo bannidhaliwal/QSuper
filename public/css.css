@@ -30,6 +30,7 @@ body{
 .containerExtensionForContentArea{ /*Content area*/
   margin-top:2%;
   width:100%;
+  min-height:400px;
   height:70%;
   background-color:#2A9FD8;
 }
@@ -95,4 +96,67 @@ body{
   color:black;
   font-size:1em;
   line-height: 2;
+}
+
+/*Gradient Background*/
+.linearGradient{
+  background:linear-gradient(to left,#2A9FD8,white);
+}
+
+/*Login page*/
+.loginBox{
+  height:100%;width:50%;
+  margin-left:0;
+}
+
+.loginBoxTitleSmallCharacters{
+  margin-top:10%;
+  font-size:1.5em;
+  width:40%;
+  height:10%;
+  margin-left:0;
+}
+
+.loginBoxTitleBigCharacters{
+  width:70%;
+  height:20%;
+  margin-top:-5%;
+  margin-left:0;
+}
+
+.loginPageUserNameInputBox{
+  width:30%;
+  height:80%;
+  border-radius:0;
+  float:left;
+}
+
+.loginPagePasswordInputBox{
+  margin-left:2%;
+  border-radius:0;
+  width:30%;
+  height:80%;
+  float:left;
+}
+
+.loginPageSubmitButton{
+  border:none;
+  height:80%;
+  width:30%;
+  margin-left:10px;
+}
+
+.loginPageBottomRegisterationLink{
+  width:30%;
+  height:5%;
+  margin-top:20%;
+  margin-left:0;
+  min-width:300px;
+}
+
+.loginPageBottomRegisterationLink2{
+  width:30%;
+  height:5%;
+  margin-left:0;
+  cursor:pointer;
 }

@@ -1,2 +1,13 @@
-<h1>This is Privacy Policy Page</h1>
-<% include header.ejs%>
+<html>
+  <head>
+    <!-- This ejs statement includes header partial.
+    Varibale declaration decides which page is active !-->
+    <% include head.ejs %>
+    <% var page = 'privacypolicy'%>
+    <% var active = "active"%>
+  </head>
+  <body>
+    <% include header.ejs %>
+  </body>
+
+</html>
