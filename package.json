@@ -4,7 +4,7 @@
   "description": "This project involves creating a dynamic website for Q-Super and a game version of Super annuation process.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -25,7 +25,9 @@
      "socket.io":"latest",
      "express":"latest",
      "mysql":"latest",
-     "body-parser":"latest"
+     "body-parser":"latest",
+     "mocha":"latest",
+     "chai":"latest"
   },
   "start":"node app.js"
 }
