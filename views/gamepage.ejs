@@ -36,6 +36,7 @@
         var canvas = document.getElementById("canvas").getContext("2d");
         for(var i = 0; i < array.length;i++){
           if(array[i] !== null){
+            //Here we are choosing element from array img on the base of element of current box.
             canvas.drawImage(img[array[i].element],array[i].xPosition,array[i].yPosition,array[i].height,array[i].width);
           }
         }//end For
