@@ -10,26 +10,25 @@
     <% include header.ejs %>
     <canvas id = "canvas" width="1000" height = "1000" style="border:1px solid #c3c3c3;"></canvas>
   </body>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+      var socket = io.connect();
+      socket.on("Game Initialized",function(data)
+      {
+        console.log(data.array);
+        var array = data.array;
+        var canvas = document.getElementById("canvas").getContext("2d");
+        for(var i = 0; i < array.length;i++){
+          if(array[i] !== null){
+            canvas.fillStyle = "white";
+            if(i % 2 === 0){
+              canvas.fillStyle = "Black";
+            }
+            canvas.fillRect(array[i].xPosition,array[i].yPosition,array[i].height,array[i].width);
+          }
+        }
+
+      }
+    );
+  </script>
 </html>
-
-<!--
-For Game we need to draw Images on canvas. However, Canvas in HTML
-does not support access to child elements of any drawn object, therefore
-we have to create a wrapper class for that purpose. In wrapper class we
-need functions such as:
-______________________________________________________
-var id; //id of object.
-
-var currentX;
-var currentY;
-
-drawObject(x,y,length,height); //function to draw object on canvas.
-
-swapObject(id,id2);//check for legal swaps.
-
-clearObject();//function to clear element from current position.
-
-moveObject();//Think about scenarios where the elements underneath
-are popped.
-_______________________________________________________
-!-->
