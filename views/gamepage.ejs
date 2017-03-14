@@ -8,27 +8,46 @@
   </head>
   <body>
     <% include header.ejs %>
-    <canvas id = "canvas" width="1000" height = "1000" style="border:1px solid #c3c3c3;"></canvas>
+    <div style="margin-left:10%;height:410;width:410;">
+      <canvas id = "canvas" width="400" height = "400"></canvas>
+    </div>
+    <!--This images will be used to draw on canvas.!-->
+    <img style="display:none" id = "sun" src="/sun.jpg"></img>
+    <img style="display:none" id = "star" src="/star.png"></img>
+    <img style="display:none" id = "moon" src="/moon.jpg"></img>
+    <img style="display:none" id = "pluto" src="/pluto.png"></img>
+    <img style="display:none" id = "jupiter" src="/jupiter.png"></img>
+    <img style="display:none" id = "mercury" src="/mercury.png"></img>
+
   </body>
   <script src="/socket.io/socket.io.js"></script>
   <script>
       var socket = io.connect();
-      socket.on("Game Initialized",function(data)
-      {
-        console.log(data.array);
+      //When Socket connects with server for first time,
+      //Server serves with gameBox array. With that array
+      //We draw on canvas.
+      socket.on("Game Initialized",function(data){
         var array = data.array;
+        //This is token array. we will select elements base on the element
+        //number.
+        var img = [document.getElementById("star"),document.getElementById("sun"),document.getElementById("moon"),
+        document.getElementById("pluto"),document.getElementById("jupiter"),document.getElementById("mercury")];
+
         var canvas = document.getElementById("canvas").getContext("2d");
         for(var i = 0; i < array.length;i++){
           if(array[i] !== null){
-            canvas.fillStyle = "white";
-            if(i % 2 === 0){
-              canvas.fillStyle = "Black";
-            }
-            canvas.fillRect(array[i].xPosition,array[i].yPosition,array[i].height,array[i].width);
+            canvas.drawImage(img[array[i].element],array[i].xPosition,array[i].yPosition,array[i].height,array[i].width);
           }
-        }
-
+        }//end For
       }
-    );
+      );//end Socket.on
+
+      canvas.addEventListener('click',function() {
+        var canvas = document.getElementById("canvas");
+        var rectangleOnCanvas = canvas.getBoundingClientRect();
+        var xCoord = Math.round(event.clientX - rectangleOnCanvas.left);
+        var yCoord = Math.round(event.clientY - rectangleOnCanvas.top);
+        socket.emit("ClickedOnCanvas",{X : xCoord, Y : yCoord});
+      });
   </script>
 </html>

@@ -9,6 +9,7 @@ var mySql = require('mysql');
 var Routes = require('./lib/Routes.js');//Load the local modules.
 var SQL = require('./lib/SQL.js');
 var GameBox = require('./lib/GameClass.js');
+var socketEvents = require('./lib/SocketFunctions.js'); //socket events.
 
 var PORT = process.env.PORT || 8080; //Let heroku decide which port to choose.
 
@@ -20,13 +21,9 @@ server.use(function(req,res){
   Routes.Router(req,res,server,mySql);
 });
 //MySQL need to be pooled.
-SQL.MySqlConnection(mySql);
-
+//SQL.MySqlConnection(mySql);
 // Socket.io
 io = io.listen(server.listen(PORT));
-io.sockets.on('connection', function (socket) {
-    socket.emit("Hi");
-    GameBox.CreateGameBox(function(a){socket.emit("Game Initialized",{array : a});});
-});
+socketEvents.SocketEvents(io,GameBox); //pass IO object and GameBox Object.
 
 console.log("This application is listening on " +PORT);
