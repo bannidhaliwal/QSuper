@@ -12,3 +12,7 @@ Albert Makmur, Deblin Winata
 2. Test the shit out of Methods.
 3. Redraw only clicked element.
 4. Animate swapping.
+5. Complete registration Page.
+6. Handle Sessions.
+7. Create tables for database.
+8. Handle Authentications
