@@ -162,3 +162,31 @@ body{
   margin-left:0;
   cursor:pointer;
 }
+/*Registration page classes*/
+.registrationPageContentAreaHeading1{
+  padding-left:5%;
+  font-size:4em;
+  height:20%;
+  min-height:100px;
+  margin-top:0;
+  color:white;
+}
+
+.registrationPageContentAreaHeading2{
+  margin-top:0;
+  background-color:white;
+  height:20%;
+  min-height:100px;
+}
+
+.registrationPageContentAreaHeading3{
+  margin-top:0;
+  background-color:white;
+  height:20%;
+  min-height:100px;
+}
+
+.registrationPageFormDiv{
+  background-color:white;
+  height:500px;
+}
