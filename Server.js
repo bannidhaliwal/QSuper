@@ -1,6 +1,6 @@
 //This file is the main entry point for
 //Q-Super Project.
-//@author: Banni
+//@author: Banni Singh Dhaliwal
 var express = require ('express');
 var server = express();
 var io = require('socket.io');
