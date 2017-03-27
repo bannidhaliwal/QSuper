@@ -19,16 +19,18 @@
     <% if(page != 'homepage'){%><li><%}%>
       <a href="homepage">Home</a>
     </li>
-
-    <% if(page === 'login'){%><li class =" <%=active%>"><%}%>
-    <% if(page != 'login'){%><li><%}%>
-      <a href="/login">Login</a>
-    </li>
-
-    <% if(page === 'register'){%><li class =" <%=active%>"><%}%>
-    <% if(page != 'register'){%><li><%}%>
-      <a href="/register">Register</a>
-    </li>
+    <% if(locals.loggedIn !== true){%><!-- We need to check if user is logged in and should display login link or not..!-->
+      <% if(page === 'login'){%><li class =" <%=active%>"><%}%>
+      <% if(page != 'login'){%><li><%}%>
+        <a href="/login">Login</a>
+      </li>
+    <%}%>
+    <% if(locals.loggedIn !== true){%> <!-- Check if we are logged in and dont serve the registtion Page.!-->
+      <% if(page === 'register'){%><li class =" <%=active%>"><%}%>
+      <% if(page != 'register'){%><li><%}%>
+        <a href="/register">Register</a>
+      </li>
+    <%}%>
 
     <% if(page === 'about'){%><li class =" <%=active%>"><%}%>
     <% if(page != 'about'){%><li><%}%>
@@ -45,5 +47,10 @@
     <% if(page != 'gamepage'){%><li><%}%>
       <a href="/gamepage">Play Game</a>
     </li>
+    <% if(locals.loggedIn === true){%>
+    <li style = "cursor:pointer;">
+      <a href = "/logout"> Log out</a>
+    </li>
+    <%}%>
   </ul>
 </div>

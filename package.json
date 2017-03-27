@@ -27,7 +27,8 @@
      "mysql":"^2.13.0",
      "body-parser":"^1.17.1",
      "mocha":"^3.2.0",
-     "chai":"^3.5.0"
+     "chai":"^3.5.0",
+     "client-sessions":"^0.7.0"
   },
   "start":"node app.js"
 }
