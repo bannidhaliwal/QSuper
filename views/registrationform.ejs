@@ -1,28 +1,24 @@
 <div class = "container containerExtensionForContentArea registrationPageFormDiv">
-    <form action="#" method = "post">
+    <form action="/register" method = "post">
         <div class="form-group">
           <label for="firstName">*First Name:</label>
-          <input type="text" class="form-control" id="firstName">
+          <input name = "firstName" type="text" class="form-control" id="firstName">
         </div>
         <div class="form-group">
           <label for="lastName">*Last Name:</label>
-          <input type="text" class="form-control" id="lastName">
+          <input name = "lastName" type="text" class="form-control" id="lastName">
         </div>
         <div class="form-group">
           <label for="email">*Email:</label>
-          <input type="text" class="form-control" id="email">
-        </div>
-        <div class="form-group">
-          <label for="userName">*Username</label>
-          <input type="text" class="form-control" id="username">
+          <input name = "email" type="text" class="form-control" id="email">
         </div>
         <div class="form-group">
           <label for="password">*Password:(At least 6 Characters long.)</label>
-          <input type="password" class="form-control" id="password">
+          <input name = "password" type="password" class="form-control" id="password">
         </div>
         <div class="form-group">
           <label>Date of Birth</label>
-          <input type="date" class="form-control" id="dateofbirth" placeholder="Date of Birth">
+          <input name = "dob" type="date" class="form-control" id="dateofbirth" placeholder="Date of Birth">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
   </form>

@@ -8,10 +8,10 @@
   </head>
   <body>
     <% include header.ejs %>
-    <%if(locals.loggedIn){%>
+    <%if(locals.session.loggedIn){%>
       <% include loggedInHomePageView.ejs %>
     <%}%>
-    <% if(!locals.loggedIn){%>
+    <% if(!locals.session.loggedIn){%>
       <% include homePageContent.ejs %>
     <%}%>
     <div>
