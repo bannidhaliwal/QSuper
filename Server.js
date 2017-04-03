@@ -17,9 +17,7 @@ server.use(bodyParser.urlencoded({ extended: true })); //Not necessary ?
 //Use of the sessions. It is still under devlopment.
 server.use(session({
   cookieName: 'session',
-  secret: 'random_string_goes_here',
-  duration: 30 * 60 * 1000,
-  activeDuration: 5 * 60 * 1000,
+  secret: 'this_is_a_random_string',
 }));
 //Middleware for routing
 server.use(function(req,res){
