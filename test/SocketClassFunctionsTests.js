@@ -62,9 +62,6 @@ describe('#SocketFunctions.checkIfElementCanHaveAllLegalMoves(id)',function(){
 });
 
 describe('#SocketFunctions.ifElementIsInTheFirstRowOnly',function(){
-  it('Should throw an error because the ID is invalid',function(){
-    assert.throws(() => { socketFunctions.ifElementIsInTheFirstRowOnly("19")}, Error, "Invalid ID provided");
-  });
   it('Should return true as the element is in the first row only and not in the last or first column',function(){
     assert.equal(true,socketFunctions.ifElementIsInTheFirstRowOnly("17"));
   });
@@ -193,7 +190,7 @@ describe('#SocketFunctions.ifElementIsInLastRowAndFirstColumn',function(){
   });
 
 });
-
+/*
 describe("#SocketFunctions.DetermineThePositionOfClickedElement",function(){
   it('Should return AL as the all movements are legal.',function(){
     assert.equal(Constants().ALL_LEGAL,socketFunctions.DetermineThePositionOfClickedElement("27"));
@@ -274,4 +271,17 @@ describe("#SocketFunctions.AssignPositions",function(){
     assert.equal(27,socketFunctions.AssignPositions(null,null,26,Constants().ALL_LEGAL)[2]);
     assert.equal(25,socketFunctions.AssignPositions(null,null,26,Constants().ALL_LEGAL)[3]);
   });
+});
+*/
+describe("#SocketFunctions.InvalidIdArray",function(){
+  it('Should return false as the Id provided is valid',function(){
+    assert.equal(false,socketFunctions.InvalidIdArray([22,12,34]));
+  });
+  it('Should return true as the one id is out of range',function(){
+    assert.equal(true,socketFunctions.InvalidIdArray([22,32,49]));
+  });
+  it('Should return false as the all ids are in range and valid',function(){
+    assert.equal(false,socketFunctions.InvalidIdArray([22,32,48]));
+  });
+
 });
