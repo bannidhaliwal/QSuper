@@ -50,6 +50,7 @@
         document.getElementById("pluto"),document.getElementById("jupiter"),document.getElementById("mercury")];
 
         var canvas = document.getElementById("canvas").getContext("2d");
+        canvas.clearRect(0, 0, 400,400);//clear the canvas before redrawing..
         for(var i = 0; i < array.length;i++){
           if(array[i] !== null){
             //Here we are choosing element from array img on the base of element of current box.
