@@ -42,6 +42,22 @@
         }//end For
       }
       );//end Socket.on
+      socket.on("Redraw",function(data){
+        var array = data.array;
+        //This is token array. we will select elements base on the element
+        //number.
+        var img = [document.getElementById("star"),document.getElementById("sun"),document.getElementById("moon"),
+        document.getElementById("pluto"),document.getElementById("jupiter"),document.getElementById("mercury")];
+
+        var canvas = document.getElementById("canvas").getContext("2d");
+        for(var i = 0; i < array.length;i++){
+          if(array[i] !== null){
+            //Here we are choosing element from array img on the base of element of current box.
+            canvas.drawImage(img[array[i].element],array[i].xPosition,array[i].yPosition,array[i].height,array[i].width);
+          }
+        }//end For
+      }
+      );
 
       canvas.addEventListener('click',function() {
         var canvas = document.getElementById("canvas");

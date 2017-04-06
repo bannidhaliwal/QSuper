@@ -283,5 +283,11 @@ describe("#SocketFunctions.InvalidIdArray",function(){
   it('Should return false as the all ids are in range and valid',function(){
     assert.equal(false,socketFunctions.InvalidIdArray([22,32,48]));
   });
+  it('Should return true as one of the ids are invalid',function(){
+    assert.equal(true,socketFunctions.InvalidIdArray([3,13,23]));
+  });
+  it('Should return true as one id is 50',function(){
+    assert.equal(true,socketFunctions.InvalidIdArray([50,32,48]));
+  });
 
 });
