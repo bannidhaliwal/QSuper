@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <!-- This ejs statement includes header partial.
+    Varibale declaration decides which page is active !-->
+    <% include head.ejs %>
+    <% var page = "calculator"%>
+    <% var active = " active"%>
+  </head>
+  <body>
+    <% include header.ejs %>
+    <div class = "container" style="width:70%;margin-left:7%;">
+      <div class = "container" style = "width:50%;margin-left:0;height:100%;float:left;">
+        <h1>
+          If you pay super:
+        </h1>
+        <h4>Annual Salary : <%=locals.stats.annualSalary%></h4>
+        <h4>Tax : <%=locals.stats.tax[1]%></h4>
+        <h4>Medlevy : <%=locals.stats.mediLevy[1]%></h4>
+        <h4>Super Balance Tax : <%=locals.stats.superBalanceTax[1]%></h4>
+        <h4>Net Super Balance : <%=locals.stats.netSuperBalance[1]%></h4>
+        <h4>Net Salary : <%=locals.stats.netSalary[1]%></h4>
+        <h4>Your Asset : <%=locals.stats.yourAsset[1]%></h4>
+        <h4>Gain : <%=locals.stats.gainLoss%></h4>
+      </div>
+      <div class = "container" style = "width:50%;margin-left:0;height:100%;float:left;">
+        <h1>
+          If you dont pay super:
+        </h1>
+        <h4>Annual Salary : <%=locals.stats.annualSalary%></h4>
+        <h4>Tax : <%=locals.stats.tax[0]%></h4>
+        <h4>Medlevy : <%=locals.stats.mediLevy[0]%></h4>
+        <h4>Super Balance Tax : <%=locals.stats.superBalanceTax[0]%></h4>
+        <h4>Net Super Balance : <%=locals.stats.netSuperBalance[0]%></h4>
+        <h4>Net Salary : <%=locals.stats.netSalary[0]%></h4>
+        <h4>Your Asset : <%=locals.stats.yourAsset[0]%></h4>
+        <h4>Loss : <%=locals.stats.gainLoss%></h4>
+      </div>
+    </div>
+    <div>
+    </div>
+  </body>
+</html>

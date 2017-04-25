@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <!-- This ejs statement includes header partial.
+    Varibale declaration decides which page is active !-->
+    <% include head.ejs %>
+    <% var page = "calculator"%>
+    <% var active = " active"%>
+  </head>
+  <body>
+    <% include header.ejs %>
+    <div class = "container" style="width:50%;margin-left:7%;">
+      <h1>About:</h1>
+      <p>This calculator is a guide to teach the user that how much he can save if pays extra on the top of his
+        super.</p>
+      <h1>How to use:</h1>
+      <p>Just enter your monthly salary and how much you want to put to the super every month. We will calculate the
+        annual stats for you.</p>
+      <form name = "loginForm" method = "post" action="/calculations">
+        <div class ="container" style="width:100%;height:5%;margin-left:-3%;margin-top:5%;">
+          <input type="number" min = "0" name = "monthlysalary" class="form-control loginPageUserNameInputBox" placeholder="Monthly Salary">
+          <input type="number"min = "0" name = "monthlysuper" class="form-control loginPagePasswordInputBox" placeholder="Monthly Super">
+          <button type="submit" class="btn-primary loginPageSubmitButton">Submit &#x2192</button>
+        </div>
+      </form>
+    </div>
+    <div>
+    </div>
+  </body>
+</html>

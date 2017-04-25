@@ -52,5 +52,9 @@
       <a href = "/logout"> Log out</a>
     </li>
     <%}%>
+    <% if(page === 'calculator'){%><li class =" <%=active%>"><%}%>
+    <% if(page != 'calculator'){%><li><%}%>
+      <a href="/calculator"> Calculator</a>
+    </li>
   </ul>
 </div>
