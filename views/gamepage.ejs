@@ -12,12 +12,13 @@
       <canvas id = "canvas" width="400" height = "400"></canvas>
     </div>
     <!--This images will be used to draw on canvas.!-->
-    <img style="display:none" id = "sun" src="/sun.jpg"></img>
-    <img style="display:none" id = "star" src="/star.png"></img>
-    <img style="display:none" id = "moon" src="/moon.jpg"></img>
-    <img style="display:none" id = "pluto" src="/pluto.png"></img>
-    <img style="display:none" id = "jupiter" src="/jupiter.png"></img>
-    <img style="display:none" id = "mercury" src="/mercury.png"></img>
+    <img style="display:none" id = "balance" src="/balance.png"></img>
+    <img style="display:none" id = "cash" src="/cash.png"></img>
+    <img style="display:none" id = "cocontribution" src="/cocontribution.png"></img>
+    <img style="display:none" id = "conservative" src="/conservative.png"></img>
+    <img style="display:none" id = "growth" src="/growth.png"></img>
+    <img style="display:none" id = "salarysacrifice" src="/salarysacrifice.png"></img>
+    <img style="display:none" id = "empty" src="/empty.png"></img>
 
   </body>
   <script src="/socket.io/socket.io.js"></script>
@@ -30,8 +31,9 @@
         var array = data.array;
         //This is token array. we will select elements base on the element
         //number.
-        var img = [document.getElementById("star"),document.getElementById("sun"),document.getElementById("moon"),
-        document.getElementById("pluto"),document.getElementById("jupiter"),document.getElementById("mercury")];
+        var img = [document.getElementById("cash"),document.getElementById("balance"),document.getElementById("cocontribution"),
+        document.getElementById("conservative"),document.getElementById("growth"),document.getElementById("salarysacrifice"),
+        document.getElementById("empty")];
 
         var canvas = document.getElementById("canvas").getContext("2d");
         for(var i = 0; i < array.length;i++){
@@ -46,8 +48,9 @@
         var array = data.array;
         //This is token array. we will select elements base on the element
         //number.
-        var img = [document.getElementById("star"),document.getElementById("sun"),document.getElementById("moon"),
-        document.getElementById("pluto"),document.getElementById("jupiter"),document.getElementById("mercury")];
+        var img = [document.getElementById("cash"),document.getElementById("balance"),document.getElementById("cocontribution"),
+        document.getElementById("conservative"),document.getElementById("growth"),document.getElementById("salarysacrifice"),
+        document.getElementById("empty")];
 
         var canvas = document.getElementById("canvas").getContext("2d");
         canvas.clearRect(0, 0, 400,400);//clear the canvas before redrawing..
