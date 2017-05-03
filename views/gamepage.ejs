@@ -22,8 +22,16 @@
 
   </body>
   <script src="/socket.io/socket.io.js"></script>
+  <script src="/AnimationFunctions.js"></script>
   <script>
       var socket = io.connect();
+      socket.on("SwapAnimation",function(data){
+        var img = [document.getElementById("cash"),document.getElementById("balance"),document.getElementById("cocontribution"),
+        document.getElementById("conservative"),document.getElementById("growth"),document.getElementById("salarysacrifice"),
+        document.getElementById("empty")];
+        var canvas = document.getElementById("canvas").getContext("2d");
+        SwapObjects(data,canvas,img);
+      });
       //When Socket connects with server for first time,
       //Server serves with gameBox array. With that array
       //We draw on canvas.
@@ -36,6 +44,7 @@
         document.getElementById("empty")];
 
         var canvas = document.getElementById("canvas").getContext("2d");
+        canvas.clearRect(0, 0, 400,400);//clear the canvas before redrawing..
         for(var i = 0; i < array.length;i++){
           if(array[i] !== null){
             //Here we are choosing element from array img on the base of element of current box.
