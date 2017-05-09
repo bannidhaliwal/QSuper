@@ -88,9 +88,8 @@ body{
   color:#2A9FD8;
   margin-left:10%;
   margin-top:5%;
-  border-bottom: solid;
   border-width:1px;
-  overflow: flexible;
+  height:1000px:
 }
 .aboutContentAreaContainer p{
   color:black;
@@ -189,4 +188,40 @@ body{
 .registrationPageFormDiv{
   background-color:white;
   height:500px;
+}
+
+.footerContainer{
+  height:40%;
+  width:100%;
+  margin-top:100px;
+}
+
+.footerContainer a {
+  color:black;
+}
+
+.footerContainerAboutAndNavigationBox{
+  margin-left: 5%;
+  margin-top : 2%;
+  height:80%;
+  width:20%;
+  float:left;
+}
+
+.footerContainerAboutAndNavigationBoxLinks{
+  width:100%;
+  height:20%;
+  text-align:center;
+  font-size: 1.5em;
+}
+
+.footerContainerAboutAndNavigationBoxLinksFontSettings{
+  font-size:1em;
+}
+
+.footerContainerImageLinksBox{
+  float:left;
+  border:solid;
+  width:20%;
+  height:100%;
 }
