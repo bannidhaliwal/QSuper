@@ -12,3 +12,10 @@ Albert Makmur, Deblin Winata
 4. Add the friend widget where a user can add friends.
 5. Live chat funcitonality.
 6. Scoring funcitonlity.
+7. Repopulate the popped elements.
+8. REFACTOR THE CODE.
+9. Pop the find the clusters after the elements have been popped.
+10. Shade the element which has been clicked before the movement so player can differentiate.
+11. When removing cluster, we always change the second element to dismantle the cluster,
+    however it fails when we have a cluster of 5 elements or more. CHANGE IT.
+12. Comment and use constants on the gamePage and animation functions

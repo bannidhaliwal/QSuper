@@ -47,14 +47,14 @@
     <% if(page != 'gamepage'){%><li><%}%>
       <a href="/gamepage">Play Game</a>
     </li>
+    <% if(page === 'calculator'){%><li class =" <%=active%>"><%}%>
+    <% if(page != 'calculator'){%><li><%}%>
+      <a href="/calculator"> Calculator</a>
+    </li>
     <% if(locals.session.loggedIn === true){%>
     <li style = "cursor:pointer;">
       <a href = "/logout"> Log out</a>
     </li>
     <%}%>
-    <% if(page === 'calculator'){%><li class =" <%=active%>"><%}%>
-    <% if(page != 'calculator'){%><li><%}%>
-      <a href="/calculator"> Calculator</a>
-    </li>
   </ul>
 </div>

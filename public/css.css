@@ -85,12 +85,12 @@ body{
 /*About page*/
 .aboutContentAreaContainer{
   width:50%;
-  height:20%;
   color:#2A9FD8;
   margin-left:10%;
   margin-top:5%;
   border-bottom: solid;
   border-width:1px;
+  overflow: flexible;
 }
 .aboutContentAreaContainer p{
   color:black;

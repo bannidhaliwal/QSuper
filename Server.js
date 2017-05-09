@@ -19,11 +19,11 @@ server.use(session({
   cookieName: 'session',
   secret: 'this_is_a_random_string',
 }));
+io = io.listen(server.listen(PORT));
+server.setMaxListeners(0);
+io.setMaxListeners(0);
 //Middleware for routing
 server.use(function(req,res){
-  Routes.Router(req,res,server,mySql);
+  Routes.Router(req,res,server,mySql,io,socketEvents,GameBox);
 });
-// Socket.io
-io = io.listen(server.listen(PORT));
-socketEvents.SocketEvents(io,GameBox); //pass IO object and GameBox Object.
 console.log("This application is listening on " +PORT);
