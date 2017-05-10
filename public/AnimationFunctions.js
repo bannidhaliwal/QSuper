@@ -46,8 +46,8 @@ function SwapObjects(data,canvas,imgArray){
     var destinationY = ((GetXandYCoordinate(destination).y)-1)*50;
     var homeX = ((GetXandYCoordinate(home).x)-1)*50;
     var homeY = ((GetXandYCoordinate(home).y)-1)*50;
-    canvas.clearRect(homeX,homeY,50,50);
-    canvas.clearRect(destinationX,destinationY,50,50);
+    /*canvas.clearRect(homeX,homeY,50,50);
+    canvas.clearRect(destinationX,destinationY,50,50);*/
     DrawElements(canvas,GetXandYCoordinate(home).x,GetXandYCoordinate(home).y,counterY,counterX,imgArray[data.ids.destElement],"white");
     DrawElements(canvas,GetXandYCoordinate(destination).x,GetXandYCoordinate(destination).y,(counterY)-(counterY*2),(counterX)-(counterX*2),imgArray[data.ids.homeElement],"white");
   },20);
@@ -60,7 +60,7 @@ function Highlight(data,canvas,img,color){
 }
 
 //Function to animate the movement of elements after the popping of the element
-function MoveElements(data,canvas,imgArray){
+function MoveElements(data,canvas,imgArray,socket){
   if(data.elementsToReposition.length == 0){
     return 0;//If we have no elements to move just simply return and do nothing..
   }
@@ -74,17 +74,28 @@ function MoveElements(data,canvas,imgArray){
   var widthToClear = ((lastColumn - firstColumn) + 1) * 50;
   var startingX = (parseInt(GetXandYCoordinate(firstElement).x) * 50) - 50;
   var startingY = (parseInt(GetXandYCoordinate(firstElement).y) * 50) - 50;
-  canvas.clearRect(startingX,startingY,widthToClear,heightToClear);
-  var counterY = -10;
+  var counterY = 0;
   var rowsToMove = lastRow - firstRow;
+  canvas.clearRect(startingX,startingY,widthToClear,heightToClear);
+
+  var movingDownDistance = (data.elementsToReposition[0].moveTo - data.elementsToReposition[0].id)/10;
+  movingDownDistance = (-50) * movingDownDistance;
+  var movingIntervalTime = 10;
+  var timeTakenForAnimation = Math.abs((movingDownDistance * movingIntervalTime)) + 100;
+  console.log(timeTakenForAnimation);
   var movingInterval = setInterval(function(){
     for(var currentElement = (data.elementsToReposition.length - 1);currentElement>=0;currentElement--){
-      DrawElements(canvas,GetXandYCoordinate(data.elementsToReposition[currentElement].id).x,GetXandYCoordinate(data.elementsToReposition[currentElement].id).y,counterY,0,imgArray[data.gameArray[data.elementsToReposition[currentElement].id].element],"white");
+      DrawElements(canvas,GetXandYCoordinate(data.elementsToReposition[currentElement].id).x,GetXandYCoordinate(data.elementsToReposition[currentElement].id).y,counterY,0,imgArray[data.gameArray[data.elementsToReposition[currentElement].moveTo].element],"white");
     }
-    counterY-=10;
-  },10);
-  setTimeout(function(){clearInterval(movingInterval)},50);
-  //setTimeout(function(){clearInterval(movingInterval);},500);
+    if(counterY > movingDownDistance){
+      counterY-=1;
+    }
+  },movingIntervalTime);
+  setTimeout(function(){
+    clearInterval(movingInterval);
+    socket.emit("RedrawAfterMoving",{});
+  }
+  ,timeTakenForAnimation);
 }
 
 //Helper function to draw elements on the given x and y coordinates..
@@ -93,6 +104,7 @@ function DrawElements(canvas,x,y,counterY,counterX,img,color){
     var coordinateY = (y-1)*50;
     canvas.fillStyle = color;
     canvas.fillRect(coordinateX,coordinateY,50,50);
+    canvas.fillRect(coordinateX-counterX,coordinateY-counterY,50,50);
     canvas.drawImage(img,coordinateX-counterX,coordinateY-counterY,50,50);
 }
 
