@@ -1,3 +1,6 @@
+//This files contains the animation functions.
+//@author: Navjot Singh Dhaliwal
+
 //Function to swap the elements..
 function SwapObjects(data,canvas,imgArray){
   var SOUTH = -10;
@@ -62,6 +65,7 @@ function Highlight(data,canvas,img,color){
 //Function to animate the movement of elements after the popping of the element
 function MoveElements(data,canvas,imgArray,socket){
   if(data.elementsToReposition.length == 0){
+    socket.emit("RedrawAfterMoving",{});
     return 0;//If we have no elements to move just simply return and do nothing..
   }
   var firstElement = data.elementsToReposition[0].id;
@@ -76,13 +80,14 @@ function MoveElements(data,canvas,imgArray,socket){
   var startingY = (parseInt(GetXandYCoordinate(firstElement).y) * 50) - 50;
   var counterY = 0;
   var rowsToMove = lastRow - firstRow;
+  //Clear all the elements which need to be moved so we can animate movements.
   canvas.clearRect(startingX,startingY,widthToClear,heightToClear);
+  //Now we need to move the elements down..
 
-  var movingDownDistance = (data.elementsToReposition[0].moveTo - data.elementsToReposition[0].id)/10;
+  var movingDownDistance = (data.elementsToReposition[0].moveTo - data.elementsToReposition[0].id)/10;//Here we are checking that how many tiles we have to move..
   movingDownDistance = (-50) * movingDownDistance;
   var movingIntervalTime = 10;
   var timeTakenForAnimation = Math.abs((movingDownDistance * movingIntervalTime)) + 100;
-  console.log(timeTakenForAnimation);
   var movingInterval = setInterval(function(){
     for(var currentElement = (data.elementsToReposition.length - 1);currentElement>=0;currentElement--){
       DrawElements(canvas,GetXandYCoordinate(data.elementsToReposition[currentElement].id).x,GetXandYCoordinate(data.elementsToReposition[currentElement].id).y,counterY,0,imgArray[data.gameArray[data.elementsToReposition[currentElement].moveTo].element],"white");
