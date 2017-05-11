@@ -58,7 +58,6 @@
     var yourasset = [0, 0];
 
     annsal = parseInt(document.getElementById("monthlysalary").value) ;
-
     annsalsac = monthsalsac * 12;
 
     contributeannual = annsal * 0.095;
@@ -69,19 +68,19 @@
     superbal[1] = contributeannual + annsalsac;
     superbal[0] = contributeannual;
 
-    if (taxincome[1] < 18201)
+    if (annsal < 18201)
     {
-    	tax[1] = taxincome[1] * 0;
+    	tax[1] = 0;
     }
-    else if (taxincome[1] < 37001)
+    else if (annsal < 37001)
     {
     	tax[1] = (taxincome[1] - 18200) * 0.19;
     }
-    else if (taxincome[1] < 80001)
+    else if (annsal < 80001)
     {
     	tax[1] = ((taxincome[1] - 37000) * 0.325) + 3572;
     }
-    else if (taxincome[1] < 180001)
+    else if (annsal < 180001)
     {
     	tax[1] = ((taxincome[1] - 87000) * 0.37) + 19822;
     }
@@ -90,19 +89,19 @@
     	tax[1] = ((taxincome[1] - 180000) * 0.45) + 54232;
     }
 
-    if (taxincome < 18201)
+    if (annsal < 18201)
     {
-    	tax[0] = taxincome[0] * 0;
+    	tax[0] = 0;
     }
-    else if (taxincome[0] < 37001)
+    else if (annsal < 37001)
     {
     	tax[0] = (taxincome[0] - 18200) * 0.19;
     }
-    else if (taxincome[0] < 80001)
+    else if (annsal < 80001)
     {
     	tax[0] = ((taxincome[0] - 37000) * 0.325) + 3572;
     }
-    else if (taxincome[0] < 180001)
+    else if (annsal < 180001)
     {
     	tax[0] = ((taxincome[0] - 87000) * 0.37) + 19822;
     }
@@ -110,7 +109,6 @@
     {
     	tax[0] = ((taxincome[0] - 180000) * 0.45) + 54232;
     }
-
     medilevy[1] = taxincome[1] * 0.02;
     medilevy[0] = taxincome[0] * 0.02;
     superbaltax[1] = annsalsac * 0.15;
