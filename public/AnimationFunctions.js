@@ -98,7 +98,7 @@ function MoveElements(data,canvas,imgArray,socket){
   },movingIntervalTime);
   setTimeout(function(){
     clearInterval(movingInterval);
-    socket.emit("RedrawAfterMoving",{});
+    console.log(timeTakenForAnimation)
   }
   ,timeTakenForAnimation);
 }

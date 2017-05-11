@@ -113,8 +113,8 @@
 
     medilevy[1] = taxincome[1] * 0.02;
     medilevy[0] = taxincome[0] * 0.02;
-    superbaltax[1] = superbal[1] * 0.15;
-    superbaltax[0] = superbal[0] * 0.15;
+    superbaltax[1] = annsalsac * 0.15;
+    superbaltax[0] = 0 * 0.15;
     netsuperbal[1] = superbal[1] - superbaltax[1];
     netsuperbal[0] = superbal[0] - superbaltax[0];
     netsalary[1] = taxincome[1] - tax[1] - medilevy[1];
