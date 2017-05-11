@@ -87,13 +87,13 @@ function MoveElements(data,canvas,imgArray,socket){
   var movingDownDistance = (data.elementsToReposition[0].moveTo - data.elementsToReposition[0].id)/10;//Here we are checking that how many tiles we have to move..
   movingDownDistance = (-50) * movingDownDistance;
   var movingIntervalTime = 10;
-  var timeTakenForAnimation = Math.abs((movingDownDistance * movingIntervalTime)) + 100;
+  var timeTakenForAnimation = Math.abs((movingDownDistance * movingIntervalTime)) + 10;
   var movingInterval = setInterval(function(){
     for(var currentElement = (data.elementsToReposition.length - 1);currentElement>=0;currentElement--){
       DrawElements(canvas,GetXandYCoordinate(data.elementsToReposition[currentElement].id).x,GetXandYCoordinate(data.elementsToReposition[currentElement].id).y,counterY,0,imgArray[data.gameArray[data.elementsToReposition[currentElement].moveTo].element],"white");
     }
     if(counterY > movingDownDistance){
-      counterY-=1;
+      counterY-=2;
     }
   },movingIntervalTime);
   setTimeout(function(){
