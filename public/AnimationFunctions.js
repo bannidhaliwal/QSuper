@@ -15,6 +15,7 @@ function SwapObjects(data,canvas,imgArray){
   var difference = home - destination;
   var movingPixelsY = 0;
   var movingPixelsX = 0;
+  //Decide which direction is the element moving..
   switch(difference){
     //Minus 10 and 10 are the pixels moving for animation
     case WEST:{
@@ -38,17 +39,22 @@ function SwapObjects(data,canvas,imgArray){
       break;
     }
   }
+  var LENGTH_OF_ONE_TILE = 50;
+  var ONE_TILE_UP = -50;
+  var ONE_TILE_DOWN = 50;
+  var ONE_TILE_LEFT = -50;
+  var ONE_TILE_RIGHT = 50;
   var interval = setInterval(function(){
-    if(counterY<50 && counterY > -50 ){
+    if(counterY<ONE_TILE_DOWN && counterY > ONE_TILE_UP ){
       counterY+=movingPixelsY;
     }
-    if(counterX<50 && counterX > -50){
+    if(counterX<ONE_TILE_RIGHT && counterX > ONE_TILE_LEFT){
       counterX+=movingPixelsX;
     }
-    var destinationX = ((GetXandYCoordinate(destination).x)-1)*50;
-    var destinationY = ((GetXandYCoordinate(destination).y)-1)*50;
-    var homeX = ((GetXandYCoordinate(home).x)-1)*50;
-    var homeY = ((GetXandYCoordinate(home).y)-1)*50;
+    var destinationX = ((GetXandYCoordinate(destination).x)-1)*LENGTH_OF_ONE_TILE;
+    var destinationY = ((GetXandYCoordinate(destination).y)-1)*LENGTH_OF_ONE_TILE;
+    var homeX = ((GetXandYCoordinate(home).x)-1)*LENGTH_OF_ONE_TILE;
+    var homeY = ((GetXandYCoordinate(home).y)-1)*LENGTH_OF_ONE_TILE;
     /*canvas.clearRect(homeX,homeY,50,50);
     canvas.clearRect(destinationX,destinationY,50,50);*/
     DrawElements(canvas,GetXandYCoordinate(home).x,GetXandYCoordinate(home).y,counterY,counterX,imgArray[data.ids.destElement],"white");
@@ -64,20 +70,18 @@ function Highlight(data,canvas,img,color){
 
 //Function to animate the movement of elements after the popping of the element
 function MoveElements(data,canvas,imgArray,socket){
-  if(data.elementsToReposition.length == 0){
-    socket.emit("RedrawAfterMoving",{});
-    return 0;//If we have no elements to move just simply return and do nothing..
-  }
+  var LENGTH_OF_ONE_TILE = 50;
+  var ONE_TILE_DOWN = -50;
   var firstElement = data.elementsToReposition[0].id;
   var lastElement = data.elementsToReposition[data.elementsToReposition.length - 1].id;
   var firstColumn = parseInt(GetXandYCoordinate(firstElement).x);
   var lastColumn = parseInt(GetXandYCoordinate(lastElement).x);
   var firstRow = parseInt(GetXandYCoordinate(firstElement).y);
   var lastRow = parseInt(GetXandYCoordinate(data.elementsToReposition[data.elementsToReposition.length - 1].moveTo).y);
-  var heightToClear = ((lastRow - firstRow) + 1) * 50;
-  var widthToClear = ((lastColumn - firstColumn) + 1) * 50;
-  var startingX = (parseInt(GetXandYCoordinate(firstElement).x) * 50) - 50;
-  var startingY = (parseInt(GetXandYCoordinate(firstElement).y) * 50) - 50;
+  var heightToClear = ((lastRow - firstRow) + 1) * LENGTH_OF_ONE_TILE;
+  var widthToClear = ((lastColumn - firstColumn) + 1) * LENGTH_OF_ONE_TILE;
+  var startingX = (parseInt(GetXandYCoordinate(firstElement).x) * LENGTH_OF_ONE_TILE) - LENGTH_OF_ONE_TILE;
+  var startingY = (parseInt(GetXandYCoordinate(firstElement).y) * LENGTH_OF_ONE_TILE) - LENGTH_OF_ONE_TILE;
   var counterY = 0;
   var rowsToMove = lastRow - firstRow;
   //Clear all the elements which need to be moved so we can animate movements.
@@ -85,7 +89,7 @@ function MoveElements(data,canvas,imgArray,socket){
   //Now we need to move the elements down..
 
   var movingDownDistance = (data.elementsToReposition[0].moveTo - data.elementsToReposition[0].id)/10;//Here we are checking that how many tiles we have to move..
-  movingDownDistance = (-50) * movingDownDistance;
+  movingDownDistance = (ONE_TILE_DOWN) * movingDownDistance;
   var movingIntervalTime = 10;
   var timeTakenForAnimation = Math.abs((movingDownDistance * movingIntervalTime)) + 10;
   var movingInterval = setInterval(function(){
@@ -98,19 +102,20 @@ function MoveElements(data,canvas,imgArray,socket){
   },movingIntervalTime);
   setTimeout(function(){
     clearInterval(movingInterval);
-    console.log(timeTakenForAnimation)
   }
   ,timeTakenForAnimation);
 }
 
 //Helper function to draw elements on the given x and y coordinates..
 function DrawElements(canvas,x,y,counterY,counterX,img,color){
-    var coordinateX = (x-1)*50;
-    var coordinateY = (y-1)*50;
+    var LENGTH_OF_ONE_TILE = 50;
+    var HEIGH_OF_ONE_TILE = 50;
+    var coordinateX = (x-1)*LENGTH_OF_ONE_TILE;
+    var coordinateY = (y-1)*LENGTH_OF_ONE_TILE;
     canvas.fillStyle = color;
-    canvas.fillRect(coordinateX,coordinateY,50,50);
-    canvas.fillRect(coordinateX-counterX,coordinateY-counterY,50,50);
-    canvas.drawImage(img,coordinateX-counterX,coordinateY-counterY,50,50);
+    canvas.fillRect(coordinateX,coordinateY,LENGTH_OF_ONE_TILE,HEIGH_OF_ONE_TILE);
+    canvas.fillRect(coordinateX-counterX,coordinateY-counterY,LENGTH_OF_ONE_TILE,HEIGH_OF_ONE_TILE);
+    canvas.drawImage(img,coordinateX-counterX,coordinateY-counterY,LENGTH_OF_ONE_TILE,HEIGH_OF_ONE_TILE);
 }
 
 //Helper method get x and y coordinate from the id..

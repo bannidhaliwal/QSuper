@@ -11,7 +11,9 @@
     <div style="margin-left:10%;height:410;width:410;">
       <canvas id = "canvas" width="400" height = "400"></canvas>
     </div>
-    <!--This images will be used to draw on canvas.!-->
+    <!--This images will be used to draw on canvas.
+        We are not showing this images that is why the property is hidden.
+    !-->
     <img style="display:none" id = "balance" src="/balance.png"></img>
     <img style="display:none" id = "cash" src="/cash.png"></img>
     <img style="display:none" id = "cocontribution" src="/cocontribution.png"></img>
@@ -19,43 +21,35 @@
     <img style="display:none" id = "growth" src="/growth.png"></img>
     <img style="display:none" id = "salarysacrifice" src="/salarysacrifice.png"></img>
     <img style="display:none" id = "empty" src="/empty.png"></img>
-
   </body>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/AnimationFunctions.js"></script>
   <script>
       var socket = io.connect();
+      var img = [document.getElementById("cash"),document.getElementById("balance"),document.getElementById("cocontribution"),
+      document.getElementById("conservative"),document.getElementById("growth"),document.getElementById("salarysacrifice"),
+      document.getElementById("empty")];
+
+      //Swap animation for the swapping elements..
       socket.on("SwapAnimation",function(data){
-        var img = [document.getElementById("cash"),document.getElementById("balance"),document.getElementById("cocontribution"),
-        document.getElementById("conservative"),document.getElementById("growth"),document.getElementById("salarysacrifice"),
-        document.getElementById("empty")];
         var canvas = document.getElementById("canvas").getContext("2d");
         SwapObjects(data,canvas,img);
       });
 
       //Highlight the selected item
       socket.on("Highlight",function(data){
-        var img = [document.getElementById("cash"),document.getElementById("balance"),document.getElementById("cocontribution"),
-        document.getElementById("conservative"),document.getElementById("growth"),document.getElementById("salarysacrifice"),
-        document.getElementById("empty")];
         var canvas = document.getElementById("canvas").getContext("2d");
         Highlight(data,canvas,img,"#33FFA5");
       });
 
       //Dehighlight the box
       socket.on("Dehighlight",function(data){
-        var img = [document.getElementById("cash"),document.getElementById("balance"),document.getElementById("cocontribution"),
-        document.getElementById("conservative"),document.getElementById("growth"),document.getElementById("salarysacrifice"),
-        document.getElementById("empty")];
         var canvas = document.getElementById("canvas").getContext("2d");
         Highlight(data,canvas,img,"white");
       });
 
       //Move the elements..
       socket.on("MoveElements",function(data){
-        var img = [document.getElementById("cash"),document.getElementById("balance"),document.getElementById("cocontribution"),
-        document.getElementById("conservative"),document.getElementById("growth"),document.getElementById("salarysacrifice"),
-        document.getElementById("empty")];
         var canvas = document.getElementById("canvas").getContext("2d");
         MoveElements(data,canvas,img);
       });
@@ -65,14 +59,10 @@
       //We draw on canvas.
       socket.on("Game Initialized",function(data){
         var array = data.array;
-        //This is token array. we will select elements base on the element
-        //number.
-        var img = [document.getElementById("cash"),document.getElementById("balance"),document.getElementById("cocontribution"),
-        document.getElementById("conservative"),document.getElementById("growth"),document.getElementById("salarysacrifice"),
-        document.getElementById("empty")];
-
         var canvas = document.getElementById("canvas").getContext("2d");
-        canvas.clearRect(0, 0, 400,400);//clear the canvas before redrawing..
+        var HEIGHT_OF_CANVAS = 400;
+        var WIDTH_OF_CANVAS = 400;
+        canvas.clearRect(0, 0, WIDTH_OF_CANVAS,HEIGHT_OF_CANVAS);//clear the canvas before redrawing..
         for(var i = 0; i < array.length;i++){
           if(array[i] !== null){
             //Here we are choosing element from array img on the base of element of current box.
@@ -83,14 +73,10 @@
       );//end Socket.on
       socket.on("Redraw",function(data){
         var array = data.array;
-        //This is token array. we will select elements base on the element
-        //number.
-        var img = [document.getElementById("cash"),document.getElementById("balance"),document.getElementById("cocontribution"),
-        document.getElementById("conservative"),document.getElementById("growth"),document.getElementById("salarysacrifice"),
-        document.getElementById("empty")];
-
         var canvas = document.getElementById("canvas").getContext("2d");
-        canvas.clearRect(0, 0, 400,400);//clear the canvas before redrawing..
+        var HEIGHT_OF_CANVAS = 400;
+        var WIDTH_OF_CANVAS = 400;
+        canvas.clearRect(0, 0, WIDTH_OF_CANVAS,HEIGHT_OF_CANVAS);//clear the canvas before redrawing..
         for(var i = 0; i < array.length;i++){
           if(array[i] !== null){
             //Here we are choosing element from array img on the base of element of current box.
@@ -99,7 +85,6 @@
         }//end For
       }
       );
-
       canvas.addEventListener('click',function() {
         var canvas = document.getElementById("canvas");
         var rectangleOnCanvas = canvas.getBoundingClientRect();
