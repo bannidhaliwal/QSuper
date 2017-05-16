@@ -56,18 +56,13 @@
     var netsuperbal = [0, 0];
     var netsalary = [0, 0];
     var yourasset = [0, 0];
-
     annsal = parseInt(document.getElementById("monthlysalary").value) ;
     annsalsac = monthsalsac * 12;
-
     contributeannual = annsal * 0.095;
-
     taxincome[1] = annsal - annsalsac;
     taxincome[0] = annsal - 0;
-
     superbal[1] = contributeannual + annsalsac;
     superbal[0] = contributeannual;
-
     if (annsal < 18201)
     {
     	tax[1] = 0;
@@ -88,7 +83,6 @@
     {
     	tax[1] = ((taxincome[1] - 180000) * 0.45) + 54232;
     }
-
     if (annsal < 18201)
     {
     	tax[0] = 0;

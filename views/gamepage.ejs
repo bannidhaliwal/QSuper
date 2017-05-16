@@ -9,10 +9,16 @@
   <body>
     <% include header.ejs %>
     <div style="margin-left:10%;height:410;width:410;">
+      <!-- It is important that the dimesnions of the canvas remains same.
+        if you want to change the dimensions, you have to change the functions at
+        the backend as well..
+        Dimensions are 400 x 400 in case if someone changes it..
+      !-->
       <canvas id = "canvas" width="400" height = "400"></canvas>
     </div>
+    <% include footer.ejs %>
     <!--This images will be used to draw on canvas.
-        We are not showing this images that is why the property is hidden.
+        We are not showing this images that is why the display property is none.
     !-->
     <img style="display:none" id = "balance" src="/balance.png"></img>
     <img style="display:none" id = "cash" src="/cash.png"></img>
