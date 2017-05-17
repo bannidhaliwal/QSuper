@@ -12,5 +12,10 @@ Albert Makmur, Deblin Winata
 5. Live chat funcitonality. ->Future developements
 6. Scoring funcitonlity.
 8. REFACTOR THE CODE.
-9. Check for the cluster after the moving of elements.
-12. Comment and use constants on the gamePage and animation functions
+9. Add the life stages to the home page of logged in users.
+10. Make a game plan. Like how the game will reflect the super process.
+11. Make the calculator look good.
+12. Fix the fluctiation issue. Possible changes might be to refresh the page when
+    user wants to make another calculation.
+
+Deadline : 20th of May 2017

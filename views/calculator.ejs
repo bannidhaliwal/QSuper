@@ -127,7 +127,9 @@
     console.log(stats);
     var ctx = document.getElementById('myChart').getContext('2d');
     document.getElementById('myChart').style.display = 'block';
-    var myChart = new Chart(ctx, {
+    ctx.clearRect(0,0,1000,1000);
+    var myChar = null;
+    myChart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: ['Net salary', 'Net super balance', 'Tax', 'Medicare'],

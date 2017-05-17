@@ -169,6 +169,7 @@ body{
   min-height:100px;
   margin-top:0;
   color:white;
+
 }
 
 .registrationPageContentAreaHeading2{
@@ -188,6 +189,7 @@ body{
 .registrationPageFormDiv{
   background-color:white;
   height:500px;
+  margin-left : 10%;
 }
 
 .footerContainer{
