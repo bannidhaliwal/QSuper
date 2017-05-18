@@ -161,6 +161,100 @@ body{
   margin-left:0;
   cursor:pointer;
 }
+
+.loginPageAlertBox{
+  height : 40px;
+  width : 30%;
+  margin-left:.90%;
+  padding : 15px;
+  color : red;
+}
+/*Logged in home page*/
+div.welcomeMessageAndStatusBoxWrapper{
+  height : 30%;
+  width : 100%;
+}
+
+.loggedInHomePageWelcomeMessage{
+  width : 20%;
+  margin-left: 5%;
+  float : left;
+}
+
+.statusBox{
+  margin-top: 2%;
+  height : 80%;
+  width : 20%;
+  float : left;
+  border-radius: 5px;
+  background-color: white;
+  color : black;
+  text-align : center;
+}
+
+.arrow{
+    margin-top : 5%;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right:10px solid white;
+    float: left;
+    height: 5px;
+}
+
+.statusBox h4{
+  color : #2A9FD8;
+}
+
+.statusBox p{
+  font-size: 1em;
+}
+
+div.avatarImageAndGameStatsWrapper{
+  height : 60%;
+  width : 100%;
+}
+
+.loggedInPageAvatarDiv{
+  position : relative;
+  border : solid;
+  height : 100%;
+  width : 20%;
+  margin-left: 4%;
+  float : left;
+}
+
+.loggedInPageAvatarDiv img{
+  width : 100%;
+  height : 100%;
+}
+
+.loggedInStatsBox{
+  height : 100%;
+  width : 20%;
+  float : left;
+  margin-left: 5%;
+}
+
+.divsOfStatsBox{
+  height : 10%;
+  margin-top : 5%;
+}
+
+.loggedInPlayGameDiv{
+  border : solid;
+  height : 100%;
+  width : 20%;
+  float : left;
+  margin-left: 5%;
+}
+
+.loggedInMoneyBags{
+  border : solid;
+  width : 20%;
+  height : 10%;
+  margin-left: 4%;
+}
+
 /*Registration page classes*/
 .registrationPageContentAreaHeading1{
   padding-left:5%;
@@ -245,4 +339,24 @@ body{
 .footerContainerImageLinksBoxGameLinkImage img{
   height : 90%;
   width : 90%;
+}
+
+/*Classes for the gamepage*/
+.gameCanvasWrapper{
+  margin-left:10%;
+  height:410;
+  width:410;
+  margin-top:5%;
+  border:solid;
+  border-radius:10px;
+  border-color:white;
+  float:left;
+}
+
+.gameControllers{
+  height : 410;
+  width : 200;
+  border : solid;
+  float : left;
+  margin-top : 5%;
 }

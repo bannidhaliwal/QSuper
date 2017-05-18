@@ -8,13 +8,17 @@
   </head>
   <body>
     <% include header.ejs %>
-    <div style="margin-left:10%;height:410;width:410;">
-      <!-- It is important that the dimesnions of the canvas remains same.
-        if you want to change the dimensions, you have to change the functions at
-        the backend as well..
-        Dimensions are 400 x 400 in case if someone changes it..
-      !-->
-      <canvas id = "canvas" width="400" height = "400"></canvas>
+    <div class = "container containerExtensionForContentArea" style = "background-color:white;">
+      <div class = "gameCanvasWrapper">
+        <!-- It is important that the dimesnions of the canvas remains same.
+          if you want to change the dimensions, you have to change the functions at
+          the backend as well..
+          Dimensions are 400 x 400 in case if someone changes it..
+        !-->
+        <canvas id = "canvas" width="400" height = "400"></canvas>
+      </div>
+      <div class = "gameControllers">
+      </div>
     </div>
     <% include footer.ejs %>
     <!--This images will be used to draw on canvas.
