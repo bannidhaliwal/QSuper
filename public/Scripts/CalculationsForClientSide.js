@@ -1,17 +1,9 @@
-function DetermineTax(){}
 function CalculateStats(salary,salarySacrifice,flagSalary,flagSalarySacrifice,callback){
   var WITH_SUPER = 1;
   var WITHOUT_SUPER = 0;
   var ANNUAL = 1;
   var MONTHLY = 0;
   var NUMBER_OF_MONTHS = 12;
-  var FIRST_SALARY_CASE = 18200;
-  var SECOND_SALARY_CASE = 37000;
-  var THIRD_SALARY_CASE = 80000;
-  var FOURTH_SALARY_CASE = 180000;
-  var SECOND_SALARY_CASE_TAX = 3572;
-  var THIRD_SALARY_CASE_TAX = 19822;
-  var FOURTH_SALARY_CASE_TAX = 54232;
   var MEDICARE_LEVY_PERCENTAGE = 0.02;
   var SUPER_BALANCE_TAX = 0.15;
   var SUPER_CONTRIBUTION_EMPLOYER = 0.095;
@@ -39,42 +31,17 @@ function CalculateStats(salary,salarySacrifice,flagSalary,flagSalarySacrifice,ca
   //first contribution from employer
   superBalance[WITH_SUPER] = (salary * SUPER_CONTRIBUTION_EMPLOYER) + salarySacrifice;
   superBalance[WITHOUT_SUPER] = salary * SUPER_CONTRIBUTION_EMPLOYER;
-
+  console.log(superBalance);
   //Determine the taxable income
   taxableIncome[WITH_SUPER] = salary - salarySacrifice;
   taxableIncome[WITHOUT_SUPER] = salary;
 
-  //Determine Tax now for both cases
-  if(salary <= FIRST_SALARY_CASE){
-    tax[WITH_SUPER] = 0;
-    tax[WITHOUT_SUPER] = 0;
-  }
-  else if(salary <= SECOND_SALARY_CASE){
-    tax[WITH_SUPER] = (taxableIncome[WITH_SUPER] - FIRST_SALARY_CASE) * 0.19;
-    tax[WITHOUT_SUPER] = (taxableIncome[WITHOUT_SUPER] - FIRST_SALARY_CASE) * 0.19;
-  }
-  else if(salary <= THIRD_SALARY_CASE){
-    tax[WITH_SUPER] = (taxableIncome[WITH_SUPER] - SECOND_SALARY_CASE) * 0.325
-    + SECOND_SALARY_CASE_TAX;
-
-    tax[WITHOUT_SUPER] = (taxableIncome[WITHOUT_SUPER] - SECOND_SALARY_CASE) * 0.325
-    + SECOND_SALARY_CASE_TAX;
-  }
-  else if (salary <= FOURTH_SALARY_CASE){
-    tax[WITH_SUPER] = (taxableIncome[WITH_SUPER] - THIRD_SALARY_CASE) * 0.37
-    + THIRD_SALARY_CASE_TAX;
-
-    tax[WITHOUT_SUPER] = (taxableIncome[WITHOUT_SUPER] - THIRD_SALARY_CASE) * 0.37
-    + THIRD_SALARY_CASE_TAX;
-  }
-  else{
-    tax[WITH_SUPER] = (taxableIncome[WITH_SUPER] - FOURTH_SALARY_CASE) * 0.45 + FOURTH_SALARY_CASE_TAX;
-    tax[WITHOUT_SUPER] = (taxableIncome[WITHOUT_SUPER] - FOURTH_SALARY_CASE) * 0.45 + FOURTH_SALARY_CASE_TAX;
-  }
-
+  tax[WITH_SUPER] = CalculateTax(taxableIncome[WITH_SUPER]);
+  tax[WITHOUT_SUPER] = CalculateTax(taxableIncome[WITHOUT_SUPER]);
   medicareLevy[WITH_SUPER] = taxableIncome[WITH_SUPER] * MEDICARE_LEVY_PERCENTAGE;
   medicareLevy[WITHOUT_SUPER] = taxableIncome[WITHOUT_SUPER] * MEDICARE_LEVY_PERCENTAGE;
-  superBalanceTax[WITH_SUPER] = superBalance[WITH_SUPER] * SUPER_BALANCE_TAX;
+  superBalanceTax[WITH_SUPER] = salarySacrifice * SUPER_BALANCE_TAX;
+  console.log(superBalanceTax);
   superBalanceTax[WITHOUT_SUPER] = 0; //Because we havent made any contribution to the super..
   netSuperBalance[WITH_SUPER] = superBalance[WITH_SUPER] - superBalanceTax[WITH_SUPER];
   netSuperBalance[WITHOUT_SUPER] = superBalance[WITHOUT_SUPER] - superBalanceTax[WITHOUT_SUPER];
@@ -97,6 +64,36 @@ function CalculateStats(salary,salarySacrifice,flagSalary,flagSalarySacrifice,ca
   console.log(stats);
   callback(stats);
 }
+
+function CalculateTax(taxableIncome){
+  var FIRST_SALARY_CASE = 18200;
+  var SECOND_SALARY_CASE = 37000;
+  var THIRD_SALARY_CASE = 87000;
+  var FOURTH_SALARY_CASE = 180000;
+  var SECOND_SALARY_CASE_TAX = 3572;
+  var THIRD_SALARY_CASE_TAX = 19822;
+  var FOURTH_SALARY_CASE_TAX = 54232;
+  var tax = 0;
+  //Determine Tax now for both cases
+  if(taxableIncome <= FIRST_SALARY_CASE){
+    tax = 0;
+  }
+  else if(taxableIncome <= SECOND_SALARY_CASE){
+    tax = (taxableIncome - FIRST_SALARY_CASE) * 0.19;
+    console.log(taxableIncome);
+  }
+  else if(taxableIncome <= THIRD_SALARY_CASE){
+    tax = ((taxableIncome - SECOND_SALARY_CASE) * 0.325) + SECOND_SALARY_CASE_TAX;
+  }
+  else if (taxableIncome <= FOURTH_SALARY_CASE){
+    tax = (taxableIncome - THIRD_SALARY_CASE) * 0.37 + THIRD_SALARY_CASE_TAX;
+  }
+  else{
+    tax = (taxableIncome - FOURTH_SALARY_CASE) * 0.45 + FOURTH_SALARY_CASE_TAX;
+  }
+  return tax;
+}
+
 function DrawChart(stats){
   var WITH_SUPER = 1;
   var WITHOUT_SUPER = 0;
