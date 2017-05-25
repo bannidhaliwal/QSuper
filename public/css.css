@@ -343,20 +343,43 @@ div.avatarImageAndGameStatsWrapper{
 
 /*Classes for the gamepage*/
 .gameCanvasWrapper{
-  margin-left:10%;
   height:410;
   width:410;
-  margin-top:5%;
-  border:solid;
   border-radius:10px;
   border-color:white;
-  float:left;
+  margin-left: 12.5%;
 }
 
 .gameControllers{
-  height : 410;
-  width : 200;
-  border : solid;
+  height : 50px;
+  width : 390;
+  margin-left: 12.5%;
+  color : blue;
+}
+.gameControllersInsideBoxes{
+  height : 100%;
+  width : 25%;
   float : left;
-  margin-top : 5%;
+  text-align : center;
+  font-size : 1em;
+}
+
+/*After Level clear */
+#SuperInformation{
+  display:none;
+  background-color:white;
+  text-align:center;
+}
+
+.SuperInformationBox{
+  float:left;
+  width:50%;
+  height:70%;
+  border:solid;
+}
+
+.SuperInformationBoxInsideBox{
+  width:100%;
+  border:solid;
+  height:10%;
 }

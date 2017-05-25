@@ -8,7 +8,21 @@
   </head>
   <body>
     <% include header.ejs %>
-    <div class = "container containerExtensionForContentArea" style = "background-color:white;">
+    <div id = "GameContent" class = "container containerExtensionForContentArea" style = "background-color:white;">
+      <div class = "gameControllers">
+        <div class = "gameControllersInsideBoxes">
+            Level : 1
+        </div>
+        <div class = "gameControllersInsideBoxes">
+            Cash : <span id = "score"></span>
+        </div>
+        <div class = "gameControllersInsideBoxes">
+            Moves : <span id = "moves"></span>
+        </div>
+        <div class = "gameControllersInsideBoxes">
+            Super : <span id = "super"></span>
+        </div>
+      </div>
       <div class = "gameCanvasWrapper">
         <!-- It is important that the dimesnions of the canvas remains same.
           if you want to change the dimensions, you have to change the functions at
@@ -17,7 +31,46 @@
         !-->
         <canvas id = "canvas" width="400" height = "400"></canvas>
       </div>
-      <div class = "gameControllers">
+    </div>
+    <div id = "SuperInformation" class = "container containerExtensionForContentArea">
+      <h1> LEVEL CLEAR</h1>
+      <div class = "SuperInformationBox">
+        <div class = "SuperInformationBoxInsideBox"><h4>Without Super</h4></div>
+        <div class = "SuperInformationBoxInsideBox">
+          <h5>Total Salary : <span id = "totalSalaryWithoutSuper"></h5>
+        </div>
+        <div class = "SuperInformationBoxInsideBox">
+          <h5>Tax : <span id = "taxWithoutSuper"></span></h5>
+        </div>
+        <div class = "SuperInformationBoxInsideBox">
+          <h5>Take home: <span id = "takeHomeWithoutSuper"></span> </h5>
+        </div>
+        <div class = "SuperInformationBoxInsideBox">
+          <h5>Super Funds: <span id = "superFundsWithoutSuper"></span></h5>
+        </div>
+        <h1>$ <span id = "totalScoreWithoutSuper"></span></h1>
+      </div>
+      <!-- start of with super contribution!-->
+      <div class = "SuperInformationBox">
+        <div class = "SuperInformationBoxInsideBox"><h4>With Super</h4></div>
+        <div class = "SuperInformationBoxInsideBox">
+          <h5>Total Salary : <span id = "totalSalaryWithSuper"></h5>
+        </div>
+        <div class = "SuperInformationBoxInsideBox">
+          <h5>Extra Super Contribution(Maximum <span id = "superMaximum"></span>) :
+            <input id = "extraSuperInput">
+           </h5>
+        </div>
+        <div class = "SuperInformationBoxInsideBox">
+          <h5>Tax : <span id = "taxWithSuper"></span></h5>
+        </div>
+        <div class = "SuperInformationBoxInsideBox">
+          <h5>Take home: <span id = "takeHomeWithSuper"></span> </h5>
+        </div>
+        <div class = "SuperInformationBoxInsideBox">
+          <h5>Super Funds: <span id = "superFundsWithSuper"></span></h5>
+        </div>
+        <h1>$ <span id = "totalScoreWithSuper"></span></h1>
       </div>
     </div>
     <% include footer.ejs %>
@@ -33,34 +86,46 @@
     <img style="display:none" id = "empty" src="/empty.png"></img>
   </body>
   <script src="/socket.io/socket.io.js"></script>
-  <script src="/AnimationFunctions.js"></script>
+  <script src="/Scripts/AnimationFunctions.js"></script>
+  <script src ="/Scripts/CalculationsForClientSide.js"></script>
+  <script src = "/Scripts/Sounds.js"></script>
+  <script src = "/Scripts/UpdateGameElements.js"></script>
   <script>
+
+      //Socket functions..
       var socket = io.connect();
       var img = [document.getElementById("cash"),document.getElementById("balance"),document.getElementById("cocontribution"),
       document.getElementById("conservative"),document.getElementById("growth"),document.getElementById("salarysacrifice"),
       document.getElementById("empty")];
+      //Canvas for the functions..
+      var canvas = document.getElementById("canvas").getContext("2d");
+
+      //This function will be invoked when the game ends
+      socket.on("GameEnds",function(data){
+        console.log("Game Ended");
+        UpdateFinalStatsOfGame(data.levelData.score);
+        SwapDivs();
+      });
 
       //Swap animation for the swapping elements..
       socket.on("SwapAnimation",function(data){
-        var canvas = document.getElementById("canvas").getContext("2d");
         SwapObjects(data,canvas,img);
       });
 
       //Highlight the selected item
       socket.on("Highlight",function(data){
-        var canvas = document.getElementById("canvas").getContext("2d");
         Highlight(data,canvas,img,"#33FFA5");
       });
 
       //Dehighlight the box
       socket.on("Dehighlight",function(data){
-        var canvas = document.getElementById("canvas").getContext("2d");
         Highlight(data,canvas,img,"white");
       });
 
       //Move the elements..
       socket.on("MoveElements",function(data){
-        var canvas = document.getElementById("canvas").getContext("2d");
+        //Here we play the music after the tiles has been popped and before moving the tiles..
+        PlayMusic();
         MoveElements(data,canvas,img);
       });
 
@@ -69,10 +134,11 @@
       //We draw on canvas.
       socket.on("Game Initialized",function(data){
         var array = data.array;
-        var canvas = document.getElementById("canvas").getContext("2d");
         var HEIGHT_OF_CANVAS = 400;
         var WIDTH_OF_CANVAS = 400;
+        var LEVEL_INFORMATION_ELEMENT = 11;
         canvas.clearRect(0, 0, WIDTH_OF_CANVAS,HEIGHT_OF_CANVAS);//clear the canvas before redrawing..
+        UpdateHTML(array[LEVEL_INFORMATION_ELEMENT].score,array[LEVEL_INFORMATION_ELEMENT].moves);
         for(var i = 0; i < array.length;i++){
           if(array[i] !== null){
             //Here we are choosing element from array img on the base of element of current box.
@@ -83,10 +149,12 @@
       );//end Socket.on
       socket.on("Redraw",function(data){
         var array = data.array;
-        var canvas = document.getElementById("canvas").getContext("2d");
         var HEIGHT_OF_CANVAS = 400;
         var WIDTH_OF_CANVAS = 400;
+        var LEVEL_INFORMATION_ELEMENT = 11;
+        UpdateHTML(array[LEVEL_INFORMATION_ELEMENT].score,array[LEVEL_INFORMATION_ELEMENT].moves);
         canvas.clearRect(0, 0, WIDTH_OF_CANVAS,HEIGHT_OF_CANVAS);//clear the canvas before redrawing..
+        document.getElementById("score").innerHTML = array[11].score;
         for(var i = 0; i < array.length;i++){
           if(array[i] !== null){
             //Here we are choosing element from array img on the base of element of current box.
@@ -95,7 +163,10 @@
         }//end For
       }
       );
-      canvas.addEventListener('click',function() {
+
+      //we are adding the event listener to the canvas on click
+      var canvasPlane = document.getElementById("canvas");
+      canvasPlane.addEventListener('click',function() {
         var canvas = document.getElementById("canvas");
         var rectangleOnCanvas = canvas.getBoundingClientRect();
         var xCoord = Math.round(event.clientX - rectangleOnCanvas.left);
