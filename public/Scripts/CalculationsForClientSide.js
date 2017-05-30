@@ -17,6 +17,10 @@ function CalculateStats(salary,salarySacrifice,flagSalary,flagSalarySacrifice,ca
     salarySacrifice = salarySacrifice * NUMBER_OF_MONTHS;
   }//End
 
+  var maximumSacrifice = salary * 0.30;
+  if(salarySacrifice > maximumSacrifice){
+    salarySacrifice = maximumSacrifice;
+  }
   //Now lets calculate
   var taxableIncome = [];
   var tax = [];
@@ -59,7 +63,8 @@ function CalculateStats(salary,salarySacrifice,flagSalary,flagSalarySacrifice,ca
       netSuperBalance:netSuperBalance,
       netSalary:netSalary,
       assets:assets,
-      gainLoss:gainLoss
+      gainLoss:gainLoss,
+      salarySacrifice:salarySacrifice
     };
   console.log(stats);
   callback(stats);

@@ -11,7 +11,7 @@
     <div id = "GameContent" class = "container containerExtensionForContentArea" style = "background-color:white;">
       <div class = "gameControllers">
         <div class = "gameControllersInsideBoxes">
-            Level : 1
+            Level : <span id  = "level"></span>
         </div>
         <div class = "gameControllersInsideBoxes">
             Cash : <span id = "score"></span>
@@ -32,45 +32,58 @@
         <canvas id = "canvas" width="400" height = "400"></canvas>
       </div>
     </div>
-    <div id = "SuperInformation" class = "container containerExtensionForContentArea">
-      <h1> LEVEL CLEAR</h1>
-      <div class = "SuperInformationBox">
-        <div class = "SuperInformationBoxInsideBox"><h4>Without Super</h4></div>
-        <div class = "SuperInformationBoxInsideBox">
-          <h5>Total Salary : <span id = "totalSalaryWithoutSuper"></h5>
-        </div>
-        <div class = "SuperInformationBoxInsideBox">
-          <h5>Tax : <span id = "taxWithoutSuper"></span></h5>
-        </div>
-        <div class = "SuperInformationBoxInsideBox">
-          <h5>Take home: <span id = "takeHomeWithoutSuper"></span> </h5>
-        </div>
-        <div class = "SuperInformationBoxInsideBox">
-          <h5>Super Funds: <span id = "superFundsWithoutSuper"></span></h5>
-        </div>
-        <h1>$ <span id = "totalScoreWithoutSuper"></span></h1>
+    <div id = "SuperInformation" class = "finalStatsWrapper">
+      <div class = "levelClearHeading">
+        LEVEL CLEAR
       </div>
-      <!-- start of with super contribution!-->
-      <div class = "SuperInformationBox">
-        <div class = "SuperInformationBoxInsideBox"><h4>With Super</h4></div>
-        <div class = "SuperInformationBoxInsideBox">
-          <h5>Total Salary : <span id = "totalSalaryWithSuper"></h5>
+      <div class = "levelClearHeadingSubHeading">
+        Now make a choice
+      </div>
+      <div class = "superBoxes">
+        <div class = "superBoxesHeading">
+          No Super
         </div>
-        <div class = "SuperInformationBoxInsideBox">
-          <h5>Extra Super Contribution(Maximum <span id = "superMaximum"></span>) :
-            <input id = "extraSuperInput">
-           </h5>
+        <div class = "superBoxesStats">
+          You earned : <span id = "totalScore"></span>
         </div>
-        <div class = "SuperInformationBoxInsideBox">
-          <h5>Tax : <span id = "taxWithSuper"></span></h5>
+        <div class = "superBoxesStats">
+          Your Tax : <span id = "noSuperTax"></span>
         </div>
-        <div class = "SuperInformationBoxInsideBox">
-          <h5>Take home: <span id = "takeHomeWithSuper"></span> </h5>
+        <div class = "superBoxesStats">
+          Contributed Super : 0
         </div>
-        <div class = "SuperInformationBoxInsideBox">
-          <h5>Super Funds: <span id = "superFundsWithSuper"></span></h5>
+        <div class = "superBoxesStats">
+          Total Super : <span id = "noSuperTotalSuper"></span>
         </div>
-        <h1>$ <span id = "totalScoreWithSuper"></span></h1>
+        <div class = "superBoxesStats">
+          Total Assets : <span id = "noSuperTotalAssets"></span>
+        </div>
+        <div class = "superBoxesFinalScore">
+          $ <span id = "noSuperTotalScore" style = "cursor:pointer;">4000</span>
+        </div>
+      </div>
+      <div class = "superBoxes">
+        <div class = "superBoxesHeading">
+          Pay <input id = "superContribution" type = "number" max = "30.5" min = "0" value = "30"> % Super
+        </div>
+        <div class = "superBoxesStats">
+          You earned : <span id = "totalScore2"></span>
+        </div>
+        <div class = "superBoxesStats">
+          Your Tax : <span id = "taxWithSuper"></span>
+        </div>
+        <div class = "superBoxesStats">
+          Contributed Super : <span id = "contributedSuper"></span>
+        </div>
+        <div class = "superBoxesStats">
+          Total Super : <span id = "totalSuperWithSuper"></span>
+        </div>
+        <div class = "superBoxesStats">
+          Total Assets : <span id = "totalAssetsWithSuper"></span>
+        </div>
+        <div class = "superBoxesFinalScore" style = "color:orangeRed">
+          $ <span id = "totalScoreWithSuper" style = "cursor:pointer;">4000</span>
+        </div>
       </div>
     </div>
     <% include footer.ejs %>
@@ -136,9 +149,8 @@
         var array = data.array;
         var HEIGHT_OF_CANVAS = 400;
         var WIDTH_OF_CANVAS = 400;
-        var LEVEL_INFORMATION_ELEMENT = 11;
         canvas.clearRect(0, 0, WIDTH_OF_CANVAS,HEIGHT_OF_CANVAS);//clear the canvas before redrawing..
-        UpdateHTML(array[LEVEL_INFORMATION_ELEMENT].score,array[LEVEL_INFORMATION_ELEMENT].moves);
+        UpdateHTML(array);
         for(var i = 0; i < array.length;i++){
           if(array[i] !== null){
             //Here we are choosing element from array img on the base of element of current box.
@@ -151,8 +163,7 @@
         var array = data.array;
         var HEIGHT_OF_CANVAS = 400;
         var WIDTH_OF_CANVAS = 400;
-        var LEVEL_INFORMATION_ELEMENT = 11;
-        UpdateHTML(array[LEVEL_INFORMATION_ELEMENT].score,array[LEVEL_INFORMATION_ELEMENT].moves);
+        UpdateHTML(array);
         canvas.clearRect(0, 0, WIDTH_OF_CANVAS,HEIGHT_OF_CANVAS);//clear the canvas before redrawing..
         document.getElementById("score").innerHTML = array[11].score;
         for(var i = 0; i < array.length;i++){
@@ -172,6 +183,10 @@
         var xCoord = Math.round(event.clientX - rectangleOnCanvas.left);
         var yCoord = Math.round(event.clientY - rectangleOnCanvas.top);
         socket.emit("ClickedOnCanvas",{X : xCoord, Y : yCoord});
+      });
+      //Add the event listener to the input field..
+      document.getElementById('superContribution').addEventListener('change',function(){
+        setTimeout(UpdateOnKeyPress,30);
       });
   </script>
 </html>

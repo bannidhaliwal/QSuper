@@ -1,7 +1,7 @@
 /* This is CSS file for Q-Super Project.
 @author:Banni
 */
-@import url('https://fonts.googleapis.com/css?family=Inconsolata|Pridi');
+@import url('https://fonts.googleapis.com/css?family=Inconsolata|Pridi|Anton');
 body{
   min-width: 800px;
   min-height:1000px;
@@ -365,21 +365,62 @@ div.avatarImageAndGameStatsWrapper{
 }
 
 /*After Level clear */
-#SuperInformation{
-  display:none;
-  background-color:white;
-  text-align:center;
+.finalStatsWrapper{
+  width:85%;
+  height:85%;
+  margin-left: 10%;
+  display: none;
 }
-
-.SuperInformationBox{
-  float:left;
-  width:50%;
-  height:70%;
-  border:solid;
-}
-
-.SuperInformationBoxInsideBox{
-  width:100%;
-  border:solid;
+.levelClearHeading{
+  width:99%;
   height:10%;
+  text-align:center;
+  font-family: "Anton",sans-serif;
+  font-size:3em;
+}
+.levelClearHeadingSubHeading{
+  width:99%;
+  height:10%;
+  text-align:center;
+  font-family: "Anton",sans-serif;
+  font-size: 2em;
+  letter-spacing: 2px;
+}
+.superBoxes{
+  float:left;
+  width: 45%;
+  height: 75%;
+  margin-left:2%;
+}
+.superBoxesHeading{
+  width: 100%;
+  height: 10%;
+  text-align: center;
+  font-family: "Anton",sans-serif;
+  font-size: 2.5em;
+  letter-spacing: 2px;
+}
+.superBoxesHeading>input{
+  width:13%;
+  height:100%;
+  font-family: inherit;
+  text-align: center;
+  color:green;
+}
+.superBoxesStats{
+  width: 100%;
+  margin-top:1%;
+  height:10%;
+  display: block;
+  font-size:1.3em;
+  text-align: center;
+  font-weight:lighter;
+  font-family:"Anton",sans-serif;
+}
+.superBoxesFinalScore{
+  height: 40%;
+  width: 100%;
+  font-size: 5em;
+  text-align: center;
+  font-family: "Anton",sans-serif;
 }

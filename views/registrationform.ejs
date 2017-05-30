@@ -1,51 +1,27 @@
 <div class = "container containerExtensionForContentArea registrationPageFormDiv">
     <form action="/register" method = "post">
         <div class="form-group">
-          <label for="firstName" <% if(locals.session.error == true){
-            if(locals.session.errorForms.indexOf('NAME') != -1){
-              %>style = "color:red";<%
-            }
-          } %>>*First Name:</label>
+          <label for="firstName">*First Name:</label>
           <input name = "firstName" type="text" class="form-control" id="firstName">
         </div>
         <div class="form-group">
-          <label for="lastName" <% if(locals.session.error == true){
-            if(locals.session.errorForms.indexOf('LAST_NAME') != -1){
-              %>style = "color:red";<%
-            }
-          } %>>*Last Name:</label>
+          <label for="lastName">*Last Name:</label>
           <input name = "lastName" type="text" class="form-control" id="lastName">
         </div>
         <div class="form-group">
-          <label for="email" <% if(locals.session.error == true){
-            if(locals.session.errorForms.indexOf('EMAIL') != -1){
-              %>style = "color:red";<%
-            }
-          } %>>*Email: (Should be unique.)</label>
+          <label for="email">*Email: (Should be unique.)</label>
           <input name = "email" type="text" class="form-control" id="email">
         </div>
         <div class="form-group">
-          <label for="phoneNumber" <% if(locals.session.error == true){
-            if(locals.session.errorForms.indexOf('PHONE_NUMBER') != -1){
-              %>style = "color:red";<%
-            }
-          } %>>*Phone Number:</label>
+          <label for="phoneNumber">*Phone Number:</label>
           <input name = "phoneNumber" type="text" class="form-control" id="phoneNumber">
         </div>
         <div class="form-group">
-          <label for="password" <% if(locals.session.error == true){
-            if(locals.session.errorForms.indexOf('PASSWORD') != -1){
-              %>style = "color:red";<%
-            }
-          } %>>*Password:(At least 6 Characters long.)</label>
+          <label for="password">*Password:(At least 6 Characters long.)</label>
           <input name = "password" type="password" class="form-control" id="password">
         </div>
         <div class="form-group">
-          <label <% if(locals.session.error == true){
-            if(locals.session.errorForms.indexOf('DOB') != -1){
-              %>style = "color:red";<%
-            }
-          } %>>Date of Birth</label>
+          <label>Date of Birth</label>
           <input name = "dob" type="date" class="form-control" id="dateofbirth" placeholder="Date of Birth">
         </div>
         <div class="form-group">
