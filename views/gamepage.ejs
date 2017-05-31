@@ -86,6 +86,14 @@
         </div>
       </div>
     </div>
+    <div id = "GameLost" class = "levelLostBox">
+      <div class = 'levelLostBoxHeading'>
+        OUT OF MOVES!!
+      </div>
+      <div class = "levelLostTryAgainLink">
+        <a href = "/gamePage"><span id = "tryAgainLink">Try again</span></a>
+      </div>
+    </div>
     <% include footer.ejs %>
     <!--This images will be used to draw on canvas.
         We are not showing this images that is why the display property is none.
@@ -114,10 +122,14 @@
       var canvas = document.getElementById("canvas").getContext("2d");
 
       //This function will be invoked when the game ends
-      socket.on("GameEnds",function(data){
+      socket.on("GameWon",function(data){
         console.log("Game Ended");
         UpdateFinalStatsOfGame(data.levelData.score);
-        SwapDivs();
+        SwapDivs("GameContent","SuperInformation");
+      });
+
+      socket.on("GameLost",(data)=>{
+        SwapDivs("GameContent","GameLost");
       });
 
       //Swap animation for the swapping elements..
@@ -184,9 +196,34 @@
         var yCoord = Math.round(event.clientY - rectangleOnCanvas.top);
         socket.emit("ClickedOnCanvas",{X : xCoord, Y : yCoord});
       });
-      //Add the event listener to the input field..
+      /*Add event listener to the input field*/
       document.getElementById('superContribution').addEventListener('change',function(){
         setTimeout(UpdateOnKeyPress,30);
+      });
+      /*
+        Add the event listeners to the scores. When we click 
+        no super then we just emit the socket event with the 
+        0 % contribution and if we click on the contributed 
+        score then we emit the socket event with the value 
+        from the user inputted value. Error checking will be 
+        done on the server end. However, user will not be 
+        prompted because error cannot be done unless intentional
+        otherwise.
+      */
+      document.getElementById('totalScoreWithSuper').addEventListener('click',()=>{
+        var contribution = document.getElementById("superContribution").value;
+        contribution = parseInt(contribution);
+        if(contribution < 0 || contribution > 30){
+          contribution = 30;
+        }
+        setTimeout(()=>{
+          socket.emit("SaveData",{contribution : contribution});
+        },200);
+      });
+      document.getElementById('noSuperTotalScore').addEventListener('click',()=>{
+        setTimeout(()=>{
+          socket.emit("SaveData",{contribution : 0});
+        },200);
       });
   </script>
 </html>

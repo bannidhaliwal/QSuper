@@ -16,7 +16,7 @@ body{
   margin-top: 30px;
 }
 .navbar-brand{
-  color: royalblue;
+  color: royalBlue;
   font-size: 5em;
 }
 .nav{
@@ -423,4 +423,48 @@ div.avatarImageAndGameStatsWrapper{
   font-size: 5em;
   text-align: center;
   font-family: "Anton",sans-serif;
+}
+/*After level lost*/
+.levelLostBox{
+  width:50%;
+  height:50%;
+  float: left;
+  margin-left:25%;
+  display: none;
+}
+.levelLostBoxHeading{
+  width:100%;
+  height:20%;
+  float: left;
+  margin-top: 15%;
+  font-family: "Anton",sans-serif;
+  text-align: center;
+  font-size:3em;
+  color:orangeRed;
+}
+.levelLostTryAgainLink{
+  width:100%;
+  height:20%;
+  font-family: "Anton",sans-serif;
+  text-align: center;
+  font-size:1.5em;
+  letter-spacing: 1px;
+}
+#tryAgainLink{
+  cursor:pointer;
+}
+#tryAgainLink:hover{
+  color: royalBlue;
+}
+/*calculator page*/
+.wrapperForCalculations{
+  border:solid;
+  width:70%;
+  height:100%;
+  margin-left:15%;
+}
+.totalIncomeBox{
+  width:100%;
+  height:100px;
+  border:solid;
 }

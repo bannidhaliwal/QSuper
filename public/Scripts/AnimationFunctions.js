@@ -125,7 +125,7 @@ function GetXandYCoordinate(id){
 }
 
 //This function will display the game over screen
-function SwapDivs(){
-  document.getElementById("GameContent").style.display = "none";
-  document.getElementById("SuperInformation").style.display = "block";
+function SwapDivs(idToHide,idToShow){
+  document.getElementById(idToHide).style.display = "none";
+  document.getElementById(idToShow).style.display = "block";
 }

@@ -21,10 +21,11 @@ server.use(session({
   secret: 'this_is_a_random_string',
 }));
 io = io.listen(server.listen(PORT));
-server.setMaxListeners(0);
-io.setMaxListeners(0);
-//Middleware for routing
-server.use(function(req,res){
-  Routes.Router(req,res,server,mySql,io,socketEvents,GameBox);
+/*
+	This is our middleware for routing. Here we pass all the 
+	necessry elements to the Router Library..
+*/
+server.use(function(request,response){
+  Routes.Router(request,response,server,mySql,io,socketEvents,GameBox);
 });
 console.log("This application is listening on " +PORT);
