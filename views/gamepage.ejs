@@ -58,8 +58,11 @@
         <div class = "superBoxesStats">
           Total Assets : <span id = "noSuperTotalAssets"></span>
         </div>
-        <div class = "superBoxesFinalScore">
-          $ <span id = "noSuperTotalScore" style = "cursor:pointer;">4000</span>
+        <div class = "superBoxesFinalScore" style = "color:orangeRed">
+          <div class = "clickHereBox"> Click Here &#x2192</div>
+          <div class = "finalScoreBox">
+            $<span id = "noSuperTotalScore" style = "cursor:pointer;"></span>
+          </div>
         </div>
       </div>
       <div class = "superBoxes">
@@ -81,8 +84,11 @@
         <div class = "superBoxesStats">
           Total Assets : <span id = "totalAssetsWithSuper"></span>
         </div>
-        <div class = "superBoxesFinalScore" style = "color:orangeRed">
-          $ <span id = "totalScoreWithSuper" style = "cursor:pointer;">4000</span>
+        <div class = "superBoxesFinalScore" style = "color:green">
+          <div class = "clickHereBox"> Click Here &#x2192</div>
+          <div class = "finalScoreBox">
+            $<span id = "totalScoreWithSuper" style = "cursor:pointer;"></span>
+          </div>
         </div>
       </div>
     </div>
@@ -94,6 +100,7 @@
         <a href = "/gamePage"><span id = "tryAgainLink">Try again</span></a>
       </div>
     </div>
+    <a href = "/gamepage" id = "refresh" style = "display:none">
     <% include footer.ejs %>
     <!--This images will be used to draw on canvas.
         We are not showing this images that is why the display property is none.
@@ -132,6 +139,9 @@
         SwapDivs("GameContent","GameLost");
       });
 
+      socket.on("RefreshPage",(data)=>{
+        document.getElementById('refresh').click();
+      });
       //Swap animation for the swapping elements..
       socket.on("SwapAnimation",function(data){
         SwapObjects(data,canvas,img);
@@ -224,6 +234,9 @@
         setTimeout(()=>{
           socket.emit("SaveData",{contribution : 0});
         },200);
+        setTimeout(()=>{
+          document.getElementById('refresh').click();
+        },2000);
       });
   </script>
 </html>

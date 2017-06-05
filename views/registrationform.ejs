@@ -35,3 +35,15 @@
         <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
+<%if(locals.session.error == true){
+  if(locals.formData){%>
+    <script>
+      document.getElementById('email').value = "<%=formData.email%>";
+      document.getElementById('firstName').value = "<%=formData.firstName%>";
+      document.getElementById('dateofbirth').value = "<%=formData.dob%>";
+      document.getElementById('lastName').value = "<%=formData.lastName%>";
+      document.getElementById('phoneNumber').value = "<%=formData.phoneNumber%>";
+    </script>
+  <%}
+}
+%>

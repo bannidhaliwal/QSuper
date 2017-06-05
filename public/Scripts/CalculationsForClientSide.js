@@ -102,7 +102,7 @@ function CalculateTax(taxableIncome){
 function DrawChart(stats){
   var WITH_SUPER = 1;
   var WITHOUT_SUPER = 0;
-  var idOfCanvas = "myChart";
+  var idOfCanvas = "chart";
   var ctx = document.getElementById(idOfCanvas).getContext('2d');
   document.getElementById(idOfCanvas).style.display = 'block';
   ctx.clearRect(0,0,1000,1000);

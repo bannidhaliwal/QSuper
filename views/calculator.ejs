@@ -11,11 +11,51 @@
   <body>
     <% include header.ejs %>
     <div class = "wrapperForCalculations">
-      <div class = "totalIncomeBox">
+      <div class = "totalIncomeAndContributionBox">
+        <div class = "labelForSalaryAndContribution">
+          Total Income from Wages or Salary&#x2192
+        </div>
+        <div class = "inputForSalaryAndContribution">
+          <input id = "salary">
+        </div>
+        <div class = "dropDownBox">
+          <select id = "flagSalary">
+            <option value = "0">Monthly</option>
+            <option value = "1">Annualy</option>
+          </select>
+        </div>
       </div>
+      <div class = "totalIncomeAndContributionBox">
+        <div class = "labelForSalaryAndContribution">
+          Planned Salary Sacrifice Amount&#x2192
+        </div>
+        <div class = "inputForSalaryAndContribution">
+          <input id = "contribution">
+        </div>
+        <div class = "dropDownBox">
+          <select id = "flagContribution">
+            <option value = "0">Monthly</option>
+            <option value = "1">Annualy</option>
+          </select>
+        </div>
+      </div>
+      <div class = "totalIncomeAndContributionBox">
+        <div id = "calculateButton" class = "submitButtonOnCalculationsPage">
+          Calculate
+        </div>
+      </div>
+      <canvas id = "chart"></canvas>
     </div>
-    <% include footer.ejs %>
+    3
   </body>
+  <script>
+    document.getElementById("calculateButton").addEventListener('click',function(){
+      var salary = parseInt(document.getElementById('salary').value);
+      var contribution = parseInt(document.getElementById('contribution').value);
+      var flagSalary = parseInt(document.getElementById('flagSalary').value); 
+      var flagContribution = parseInt(document.getElementById('flagContribution').value);CalculateStats(salary,contribution,flagSalary,flagContribution,DrawChart);
+    });
+  </script>
   <script>
     document.getElementById("calculateButton").addEventListener("click",function(){
       //Get the salary and salary sacrifice..
