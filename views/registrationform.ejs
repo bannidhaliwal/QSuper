@@ -1,27 +1,27 @@
 <div class = "container containerExtensionForContentArea registrationPageFormDiv">
     <form action="/register" method = "post">
         <div class="form-group">
-          <label for="firstName">*First Name:</label>
+          <label id = "firstNameLabel" for="firstName">*First Name:</label>
           <input name = "firstName" type="text" class="form-control" id="firstName">
         </div>
         <div class="form-group">
-          <label for="lastName">*Last Name:</label>
+          <label for="lastName" id = "lastNameLabel">*Last Name:</label>
           <input name = "lastName" type="text" class="form-control" id="lastName">
         </div>
         <div class="form-group">
-          <label for="email">*Email: (Should be unique.)</label>
+          <label for="email" id = "emailLabel">*Email: (Should be unique.)</label>
           <input name = "email" type="text" class="form-control" id="email">
         </div>
         <div class="form-group">
-          <label for="phoneNumber">*Phone Number:</label>
+          <label for="phoneNumber" id = "phoneNumberLabel">*Phone Number:</label>
           <input name = "phoneNumber" type="text" class="form-control" id="phoneNumber">
         </div>
         <div class="form-group">
-          <label for="password">*Password:(At least 6 Characters long.)</label>
+          <label for="password" id = "passwordLabel">*Password:(At least 6 Characters long.)</label>
           <input name = "password" type="password" class="form-control" id="password">
         </div>
         <div class="form-group">
-          <label>Date of Birth</label>
+          <label id = "dob">Date of Birth</label>
           <input name = "dob" type="date" class="form-control" id="dateofbirth" placeholder="Date of Birth">
         </div>
         <div class="form-group">
@@ -35,6 +35,25 @@
         <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
+<script>
+  function HighlightErrorRegisterForms(formId){
+    if(formId == "EMAIL"){  
+      document.getElementById('emailLabel').style.color = "red";
+    }
+    else if(formId == "NAME"){
+      document.getElementById('firstNameLabel').style.color = 'red';
+    }
+    else if(formId == "LAST_NAME"){
+      document.getElementById('lastNameLabel').style.color = 'red';
+    }
+    else if(formId == "PHONE_NUMBER"){
+      document.getElementById('phoneNumberLabel').style.color = 'red';
+    }
+    else if(formId == "PASSWORD"){
+      document.getElementById('passwordLabel').style.color = 'red';
+    }
+  }
+</script>
 <%if(locals.session.error == true){
   if(locals.formData){%>
     <script>
@@ -45,5 +64,13 @@
       document.getElementById('phoneNumber').value = "<%=formData.phoneNumber%>";
     </script>
   <%}
+}
+%>
+<%if(locals.session.errorForms){
+  for(var i = 0; i<session.errorForms.length;i++){
+    %>
+    <script>HighlightErrorRegisterForms("<%= session.errorForms[i]%>")</script>
+    <%
+  }
 }
 %>
