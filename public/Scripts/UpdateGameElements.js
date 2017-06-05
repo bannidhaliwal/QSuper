@@ -2,6 +2,7 @@
 function UpdateHTML(array){
   var LEVEL_INFORMATION = 11;
   document.getElementById("score").innerHTML = array[LEVEL_INFORMATION].score;
+  
   document.getElementById("super").innerHTML = (array[LEVEL_INFORMATION].score) * 0.095;
   document.getElementById("moves").innerHTML = array[LEVEL_INFORMATION].moves;
   document.getElementById("level").innerHTML = array[LEVEL_INFORMATION].level;

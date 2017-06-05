@@ -112,11 +112,11 @@ function DrawChart(stats){
     data: {
       labels: ['Net salary', 'Net super balance', 'Tax', 'Medicare'],
       datasets: [{
-        label: 'Without contribution',
+        label: 'With contribution',
         data: [stats.netSalary[WITH_SUPER], stats.netSuperBalance[WITH_SUPER], stats.tax[WITH_SUPER], stats.medicareLevy[WITH_SUPER]],
         backgroundColor: "rgba(153,255,51,0.6)"
       }, {
-        label: 'With contribution',
+        label: 'Without contribution',
         data: [stats.netSalary[WITHOUT_SUPER], stats.netSuperBalance[WITHOUT_SUPER], stats.tax[WITHOUT_SUPER], stats.medicareLevy[WITHOUT_SUPER]],
         backgroundColor: "rgba(255,153,0,0.6)"
       }]
