@@ -158,6 +158,15 @@ function DrawChart(stats,canvas){
   });
 }
 
+function UpdateTheProgressBar(gameStats){
+  var pr = document.getElementById('progressBar').getContext('2d');
+  pr.fillStyle = "royalblue";
+  var progress = (gameStats.score/gameStats.neededScore)*100;
+  progress = Math.round((progress/100) * 390);
+  pr.fillRect(0,0,progress,50);
+  console.log(gameStats);
+}
+
 function DestroyAndInsertNewCanvasElement(callback){
   var parentOfCanvas = document.getElementById('canvasWrapper');
   var chartElement = document.getElementById('myChart');

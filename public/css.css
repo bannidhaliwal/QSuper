@@ -348,20 +348,25 @@ div.avatarImageAndGameStatsWrapper{
   border-radius:10px;
   border-color:white;
   margin-left: 12.5%;
+  float: left;
 }
 
 .gameControllers{
-  height : 50px;
-  width : 390;
-  margin-left: 12.5%;
-  color : blue;
+  height : 70px;
+  width : 390px;
+  margin-left: 5%;
+  color : royalBlue;
+  float: left;
 }
 .gameControllersInsideBoxes{
+  border:solid;
+  border-width: 1px;
   height : 100%;
   width : 25%;
   float : left;
   text-align : center;
-  font-size : 1em;
+  font-size : 1.3em;
+  font-family: "Anton",sans-serif;
 }
 
 /*After Level clear */

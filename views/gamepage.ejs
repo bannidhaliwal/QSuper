@@ -9,20 +9,6 @@
   <body>
     <% include header.ejs %>
     <div id = "GameContent" class = "container containerExtensionForContentArea" style = "background-color:white;">
-      <div class = "gameControllers">
-        <div class = "gameControllersInsideBoxes">
-            Level : <span id  = "level"></span>
-        </div>
-        <div class = "gameControllersInsideBoxes">
-            Cash : <span id = "score"></span>
-        </div>
-        <div class = "gameControllersInsideBoxes">
-            Moves : <span id = "moves"></span>
-        </div>
-        <div class = "gameControllersInsideBoxes">
-            Super : <span id = "super"></span>
-        </div>
-      </div>
       <div class = "gameCanvasWrapper">
         <!-- It is important that the dimesnions of the canvas remains same.
           if you want to change the dimensions, you have to change the functions at
@@ -30,6 +16,27 @@
           Dimensions are 400 x 400 in case if someone changes it..
         !-->
         <canvas id = "canvas" width="400" height = "400"></canvas>
+      </div>
+      <div class = "gameControllers">
+        <div class = "gameControllersInsideBoxes">
+            Level<br> <span id  = "level" style = "color:black"></span>
+        </div>
+        <div class = "gameControllersInsideBoxes">
+            Cash<br> <span id = "score" style = "color:black"></span>
+        </div>
+        <div class = "gameControllersInsideBoxes">
+            Moves <br><span id = "moves" style = "color:black"></span>
+        </div>
+        <div class = "gameControllersInsideBoxes">
+            Super <br><span id = "super" style = "color:black"></span>
+        </div>
+      </div>
+      <div class = "gameControllers" style = "height:30px;margin-top:10px;font-size:2em;text-align:center;">
+        Progress
+      </div>
+      <div class = "gameControllers" style = "border-top:solid;margin-top:10px;">
+        <canvas height = "60px" width = "380px" id = "progressBar">
+        </canvas>
       </div>
     </div>
     <div id = "SuperInformation" class = "finalStatsWrapper">
@@ -187,6 +194,7 @@
         var WIDTH_OF_CANVAS = 400;
         UpdateHTML(array);
         canvas.clearRect(0, 0, WIDTH_OF_CANVAS,HEIGHT_OF_CANVAS);//clear the canvas before redrawing..
+        UpdateTheProgressBar(array[11]);
         document.getElementById("score").innerHTML = array[11].score;
         for(var i = 0; i < array.length;i++){
           if(array[i] !== null){
