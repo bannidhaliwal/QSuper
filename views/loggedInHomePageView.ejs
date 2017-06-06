@@ -1,4 +1,4 @@
-<div class = "container containerExtensionForContentArea" style = "color:white;">
+<div class = "container containerExtensionForContentArea" style = "background-color:white;">
   <div class = "welcomeMessageAndStatusBoxWrapper">
     <div class = "loggedInHomePageWelcomeMessage">
       <h1>Welcome, <%= locals.session.name%></h1>
@@ -13,20 +13,24 @@
     <div class = "loggedInPageAvatarDiv">
       <img src = "/Avatar1.PNG" alt = "Avatar">
     </div>
-    <div class = "loggedInStatsBox">
-      <div class = "divsOfStatsBox">
-        <h3>Level:</h2>
+    <div class = "gameInformationDiv">
+      <div class = "gameInformationDivLevelAndSuperBox">
+        Level <br><span style = "color:green;"><%=locals.session.level%></span>
       </div>
-      <div class = "divsOfStatsBox">
-        <div style="height;100%;border-radius:100%;border:solid;width:20%;text-align:center;">
-        <h4><%= locals.session.level%></h2>
-        </div>
-      </div>
-      <div class = "divsOfStatsBox">
-        <h3>Super Balance:</h3>
-      </div>
-      <div class = "divsOfStatsBox">
-        <h4>AU$ : <%= locals.session.super%></h4>
+      <div class = "gameInformationDivLevelAndSuperBox" style = "margin-top:10px;">
+        Super <br><span style = "color:green;">$</span><span style = "color:green;"><%=locals.session.super%></span>
       </div>
     </div>
+    <div class = "gameInformationDiv" style= "background:url('PlayGameBackground.png');background-size:100%;background-repeat:no-repeat;">
+      <a href = "gamepage">
+        <button type="button" class="btn-primary playGameButton">Play Game &#x2192</button>
+      </a>
+    </div>
+     <div class = "gameInformationDiv" style= "background:url('CalculatorBackground.png');background-size:100%;background-repeat:no-repeat;">
+      <a href = "calculator">
+        <button type="button" class="btn-primary playGameButton">Calculator &#x2192</button>
+      </a>
+    </div>
+  </div>
+  </div>
 </div>

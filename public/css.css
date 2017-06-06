@@ -187,7 +187,7 @@ div.welcomeMessageAndStatusBoxWrapper{
   width : 20%;
   float : left;
   border-radius: 5px;
-  background-color: white;
+  background-color: #2A9FD8;
   color : black;
   text-align : center;
 }
@@ -196,22 +196,15 @@ div.welcomeMessageAndStatusBoxWrapper{
     margin-top : 5%;
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
-    border-right:10px solid white;
+    border-right:10px solid #2A9FD8;
     float: left;
     height: 5px;
-}
-
-.statusBox h4{
-  color : #2A9FD8;
-}
-
-.statusBox p{
-  font-size: 1em;
 }
 
 div.avatarImageAndGameStatsWrapper{
   height : 60%;
   width : 100%;
+  background-color:white;
 }
 
 .loggedInPageAvatarDiv{
@@ -228,31 +221,36 @@ div.avatarImageAndGameStatsWrapper{
   height : 100%;
 }
 
-.loggedInStatsBox{
-  height : 100%;
-  width : 20%;
-  float : left;
-  margin-left: 5%;
+.gameInformationDiv{
+  float:left;
+  height:100%;
+  width:20%;
+  margin-left:1%;
+  background: white;
+  margin-top: 5%;
 }
-
-.divsOfStatsBox{
-  height : 10%;
-  margin-top : 5%;
+.gameInformationDivLevelAndSuperBox{
+  width: 50%;
+  margin-left:30%;
+  border:solid;
+  height:35%;
+  color:royalblue;
+  font-size:1.3em;
+  text-align: center;
+  font-family: "Anton",sans-serif;
+  border-radius:3px;
+  cursor: pointer;
+  background-color:white;
+  color:black;
+  display:block;
 }
-
-.loggedInPlayGameDiv{
-  border : solid;
-  height : 100%;
-  width : 20%;
-  float : left;
-  margin-left: 5%;
-}
-
-.loggedInMoneyBags{
-  border : solid;
-  width : 20%;
-  height : 10%;
-  margin-left: 4%;
+.playGameButton{
+  height:15%;
+  width:100%;
+  margin-top:25%;
+  font-family: 'Anton',sans-serif;
+  font-size: 1.2em;
+  letter-spacing: 1px;
 }
 
 /*Registration page classes*/
@@ -263,7 +261,6 @@ div.avatarImageAndGameStatsWrapper{
   min-height:100px;
   margin-top:0;
   color:white;
-
 }
 
 .registrationPageContentAreaHeading2{
