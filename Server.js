@@ -18,14 +18,16 @@ server.use(express.static('public'));
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(session({
   cookieName: 'session',
-  secret: 'this_is_a_random_string',
+  secret: '#34157kljdfkjojfjiowej',
 }));
 io = io.listen(server.listen(PORT));
+/*Pack everything in one variable.*/
+var SqlAndGameElements = {Server:server,MySql:mySql,Io:io,SocketEvents:socketEvents,GameBox:GameBox};
 /*
 	This is our middleware for routing. Here we pass all the 
 	necessry elements to the Router Library..
 */
 server.use(function(request,response){
-  Routes.Router(request,response,server,mySql,io,socketEvents,GameBox);
+  Routes.Router(request,response,SqlAndGameElements);
 });
 console.log("This application is listening on " +PORT);

@@ -8,7 +8,7 @@
     </div>
     <div class = "loginPageAlertBox">
       <% if(locals.session.error == true){
-        %><label>User Not found!!</label><%
+        %><label><%=locals.session.errorMessage%></label><%
       }%>
     </div>
     <form name = "loginForm" method = "post" action="/login">

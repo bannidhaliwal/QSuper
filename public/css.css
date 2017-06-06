@@ -476,6 +476,7 @@ div.avatarImageAndGameStatsWrapper{
   width:70%;
   height:100%;
   margin-left:15%;
+  min-width: 1043px;
 }
 .totalIncomeAndContributionBox{
   width:100%;
@@ -535,4 +536,12 @@ div.avatarImageAndGameStatsWrapper{
   padding:10px;
   border-width: 1px;
   border: outset;
+}
+.summaryInformation{
+  width:100%;
+  height:20%;
+  text-align:center;
+  font-size:1.2em;
+  font-family:"Anton",sans-serif;
+  letter-spacing: 1px;
 }

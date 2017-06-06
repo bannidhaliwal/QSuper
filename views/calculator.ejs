@@ -7,6 +7,7 @@
     <% var active = " active"%>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
     <script src = "/Scripts/CalculationsForClientSide.js"></script>
+    <script src = "/Scripts/AnimationFunctions.js"></script>
   </head>
   <body>
     <% include header.ejs %>
@@ -16,7 +17,7 @@
           Total Income from Wages or Salary&#x2192
         </div>
         <div class = "inputForSalaryAndContribution">
-          <input id = "salary">
+          <input type = "number" id = "salary">
         </div>
         <div class = "dropDownBox">
           <select id = "flagSalary">
@@ -30,7 +31,7 @@
           Planned Salary Sacrifice Amount&#x2192
         </div>
         <div class = "inputForSalaryAndContribution">
-          <input id = "contribution">
+          <input type = "number" id = "contribution">
         </div>
         <div class = "dropDownBox">
           <select id = "flagContribution">
@@ -44,26 +45,43 @@
           Calculate
         </div>
       </div>
-      <canvas id = "chart"></canvas>
+      <div style = "float:left;width:30%;color:royalBlue;height:500px;">
+        <div class = "summaryInformation">
+          By paying <span id = "paySuperPerYear"></span> super per year.
+        </div>
+        <div class = "summaryInformation">
+          You take <span id = "lessNetSalary" style = "color:orangeRed;"></span> <span style = "color:orangered;">less</span> net salary home.
+        </div>
+        <div class = "summaryInformation">
+          But you will have <span id = "moreSuperPerYear" style = "color:green;"></span> <span style = "color:green">more</span> super
+        </div>
+        <div class = "summaryInformation">
+          And you will  pay <span id = "lessTax"></span> <span id = "lessOrMoreTaxTag"></span> tax and 
+          <span id = "lessLevy" style = "color:green;"></span> <span style = "color:green">less</span> medical levy.
+        </div>
+      </div>
+      <div id = "canvasWrapper" style= "float:left;height:500px;width:60%;">
+        <canvas id = "myChart" height = "500" width = "500"></canvas>
+      </div>
     </div>
   </body>
   <script>
-    document.getElementById("calculateButton").addEventListener('click',function(){
-      var salary = parseInt(document.getElementById('salary').value);
-      var contribution = parseInt(document.getElementById('contribution').value);
-      var flagSalary = parseInt(document.getElementById('flagSalary').value); 
-      var flagContribution = parseInt(document.getElementById('flagContribution').value);CalculateStats(salary,contribution,flagSalary,flagContribution,DrawChart);
-    });
-  </script>
-  <script>
     document.getElementById("calculateButton").addEventListener("click",function(){
+      if(!CheckCalculatorInputsForErrors()){
+        return;
+      }
       //Get the salary and salary sacrifice..
       var salary = document.getElementById("salary").value;
-      var salarySacrifice = document.getElementById("salarySacrifice").value;
+      var salarySacrifice = document.getElementById("contribution").value;
       salary = parseInt(salary);
       salarySacrifice = parseInt(salarySacrifice);
-      //for now we are using the hard coded flags but we need to use the radio buttons..
-      CalculateStats(salary,salarySacrifice,1,0,DrawChart);
+      var flagSalary = parseInt(document.getElementById('flagSalary').value);
+      var flagContribution = parseInt(document.getElementById('flagContribution').value);
+      DestroyAndInsertNewCanvasElement((canvas)=>{
+        //for now we are using the hard coded flags but we need to use the radio buttons
+        CalculateStats(salary,salarySacrifice,flagSalary,flagContribution,DrawChart,canvas);
+      });
+      CalculateStats(salary,salarySacrifice,flagSalary,flagContribution,PopulateTheResultsOnCalculationPage,null);
     });
   </script
 </html>

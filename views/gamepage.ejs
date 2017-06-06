@@ -127,7 +127,7 @@
       document.getElementById("empty")];
       //Canvas for the functions..
       var canvas = document.getElementById("canvas").getContext("2d");
-
+      socket.emit("initializeGame",{email:"<%=locals.session.email%>"});
       //This function will be invoked when the game ends
       socket.on("GameWon",function(data){
         console.log("Game Ended");

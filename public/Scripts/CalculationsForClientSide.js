@@ -1,4 +1,4 @@
-function CalculateStats(salary,salarySacrifice,flagSalary,flagSalarySacrifice,callback){
+function CalculateStats(salary,salarySacrifice,flagSalary,flagSalarySacrifice,callback,canvas){
   var WITH_SUPER = 1;
   var WITHOUT_SUPER = 0;
   var ANNUAL = 1;
@@ -57,6 +57,7 @@ function CalculateStats(salary,salarySacrifice,flagSalary,flagSalarySacrifice,ca
   //Make an object and pass that object to the callback..
   var stats = {
       salary:salary,
+      salarySacrifice:salarySacrifice,
       tax:tax,
       medicareLevy:medicareLevy,
       superBalanceTax:superBalanceTax,
@@ -67,7 +68,7 @@ function CalculateStats(salary,salarySacrifice,flagSalary,flagSalarySacrifice,ca
       salarySacrifice:salarySacrifice
     };
   console.log(stats);
-  callback(stats);
+  callback(stats,canvas);
 }
 
 function CalculateTax(taxableIncome){
@@ -99,27 +100,59 @@ function CalculateTax(taxableIncome){
   return tax;
 }
 
-function DrawChart(stats){
+function PopulateTheResultsOnCalculationPage(stats){
+  var WITHOUT_SUPER = 0;
+  var WITH_SUPER = 1;
+  var netSalaryDiff = Math.abs(stats.netSalary[WITHOUT_SUPER]-stats.netSalary[WITH_SUPER]);
+  var taxDiff = Math.abs(stats.tax[WITHOUT_SUPER] - stats.tax[WITH_SUPER]);
+  var superDiff = Math.abs(stats.netSuperBalance[WITH_SUPER] - stats.netSuperBalance[WITHOUT_SUPER]);
+  var medicareLevyDiff = Math.abs(stats.medicareLevy[WITH_SUPER] - stats.medicareLevy[WITHOUT_SUPER]);
+  document.getElementById("paySuperPerYear").innerHTML = Math.round(stats.salarySacrifice);
+  document.getElementById("lessNetSalary").innerHTML = Math.round(netSalaryDiff) ;
+  document.getElementById("lessTax").innerHTML = Math.round(taxDiff);
+  document.getElementById("lessLevy").innerHTML = Math.round(medicareLevyDiff);
+  document.getElementById("moreSuperPerYear").innerHTML = Math.round(superDiff);
+  DetermineIfWePayMoreTaxByPayingSuper(stats);
+}
+
+function DetermineIfWePayMoreTaxByPayingSuper(stats){
   var WITH_SUPER = 1;
   var WITHOUT_SUPER = 0;
-  var idOfCanvas = "chart";
-  var ctx = document.getElementById(idOfCanvas).getContext('2d');
-  document.getElementById(idOfCanvas).style.display = 'block';
-  ctx.clearRect(0,0,500,500);
-  var myChar = null;
-  myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['Net salary', 'Net super balance', 'Tax', 'Medicare'],
-      datasets: [{
-        label: 'With contribution(Annualy)',
-        data: [stats.netSalary[WITH_SUPER], stats.netSuperBalance[WITH_SUPER], stats.tax[WITH_SUPER], stats.medicareLevy[WITH_SUPER]],
-        backgroundColor: "rgba(153,255,51,0.6)"
-      }, {
-        label: 'Without contribution(Annualy)',
-        data: [stats.netSalary[WITHOUT_SUPER], stats.netSuperBalance[WITHOUT_SUPER], stats.tax[WITHOUT_SUPER], stats.medicareLevy[WITHOUT_SUPER]],
-        backgroundColor: "rgba(255,153,0,0.6)"
-      }]
-    }
-  });
+  if(stats.tax[WITH_SUPER] == stats.tax[WITHOUT_SUPER]){
+    var moreTax = stats.salarySacrifice * 0.15;
+    document.getElementById("lessOrMoreTaxTag").innerHTML = "MORE";
+    document.getElementById("lessOrMoreTaxTag").style.color = "orangeRed";
+    document.getElementById("lessTax").innerHTML = Math.round(moreTax);
+    document.getElementById("lessTax").style.color = "orangeRed";
+  }
+  else{
+    document.getElementById("lessOrMoreTaxTag").innerHTML = "LESS";
+    document.getElementById("lessOrMoreTaxTag").style.color = "green";
+    document.getElementById("lessTax").style.color = "green";
+  }
+}
+
+function CheckCalculatorInputsForErrors(){
+  var annualSalary = parseInt(document.getElementById('salary').value);
+  var annualContribution = parseInt(document.getElementById('contribution').value);
+  var flagSalary = parseInt(document.getElementById('flagSalary').value);
+  var flagContribution = parseInt(document.getElementById('flagContribution').value);
+  if(flagSalary == 0){
+    annualSalary *= 12;
+  }
+  if(flagContribution == 0){
+    annualContribution *= 12;
+  }
+  var MAXIMUM_SALARY_SACRIFICE = annualSalary * 0.305;
+  if(annualContribution > MAXIMUM_SALARY_SACRIFICE){
+    window.alert("You cannot sacrifice more than 30.5% of your salary into super per annum")
+    return false;
+  }
+  else if(annualSalary < 1 || annualContribution < 1){
+    window.alert('Invalid Input ');
+    return false;
+  }
+
+  console.log(annualSalary);
+  return true;
 }

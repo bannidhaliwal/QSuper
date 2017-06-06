@@ -129,3 +129,45 @@ function SwapDivs(idToHide,idToShow){
   document.getElementById(idToHide).style.display = "none";
   document.getElementById(idToShow).style.display = "block";
 }
+
+function DrawChart(stats,canvas){
+  var WITH_SUPER = 1;
+  var WITHOUT_SUPER = 0;
+  var idOfCanvas = "myChart";
+  var ctx = canvas.getContext('2d');
+  document.getElementById(idOfCanvas).style.display = 'block';
+  ctx.clearRect(0,0,500,500);
+  var myChart;
+  myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Net salary', 'Net super balance', 'Tax', 'Medicare'],
+      datasets: [{
+        label: 'With contribution(Annualy)',
+        data: [stats.netSalary[WITH_SUPER], stats.netSuperBalance[WITH_SUPER], stats.tax[WITH_SUPER], stats.medicareLevy[WITH_SUPER]],
+        backgroundColor: "rgba(153,255,51,0.6)"
+      }, {
+        label: 'Without contribution(Annualy)',
+        data: [stats.netSalary[WITHOUT_SUPER], stats.netSuperBalance[WITHOUT_SUPER], stats.tax[WITHOUT_SUPER], stats.medicareLevy[WITHOUT_SUPER]],
+        backgroundColor: "rgba(255,153,0,0.6)"
+      }]
+    },
+    options:{
+      responsive : false
+    }
+  });
+}
+
+function DestroyAndInsertNewCanvasElement(callback){
+  var parentOfCanvas = document.getElementById('canvasWrapper');
+  var chartElement = document.getElementById('myChart');
+  parentOfCanvas.removeChild(chartElement);
+  var newCanvas = document.createElement('canvas');
+  newCanvas.height = "500";
+  newCanvas.width = "500";
+  newCanvas.id = "myChart";
+  parentOfCanvas.appendChild(newCanvas);
+  parentOfCanvas.style.height = "500px";
+  parentOfCanvas.style.height = "500px";
+  callback(newCanvas);
+}
