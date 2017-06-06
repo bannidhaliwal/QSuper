@@ -38,7 +38,13 @@
         <canvas height = "60px" width = "380px" id = "progressBar">
         </canvas>
       </div>
-      <div class = "gameControllers" style = "border:solid;">
+      <div class = "gameControllers">
+        <div id = "gameTutorialButton" class = "gameTutorialAndAimButton">
+          How to Play?
+        </div>
+        <div id = "aimButton" class = "gameTutorialAndAimButton">
+          Aim
+        </div>
       </div>
     </div>
     <div id = "SuperInformation" class = "finalStatsWrapper">
@@ -107,6 +113,14 @@
       </div>
       <div class = "levelLostTryAgainLink">
         <a href = "/gamePage"><span id = "tryAgainLink">Try again</span></a>
+      </div>
+    </div>
+    <div id = "gameTutorial" class = "gameTutorialDiv" style = "display:none">
+      <div class = "gameTutorialNext">
+        <span style = "cursor:pointer;"> ></span>
+      </div>
+      <div class = "gameTutorialNext" style = "float:left;text-align:center;">
+        <span style = "cursor:pointer;"> < </span>
       </div>
     </div>
     <a href = "/gamepage" id = "refresh" style = "display:none">
@@ -247,6 +261,11 @@
         setTimeout(()=>{
           document.getElementById('refresh').click();
         },2000);
+      });
+
+      document.getElementById('gameTutorialButton').addEventListener('click',()=>{
+        document.getElementById('GameContent').style.display = "none";
+        document.getElementById('gameTutorial').style.display = "block";
       });
   </script>
 </html>

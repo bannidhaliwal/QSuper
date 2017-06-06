@@ -372,7 +372,39 @@ div.avatarImageAndGameStatsWrapper{
   font-size : 1.3em;
   font-family: "Anton",sans-serif;
 }
-
+.gameTutorialAndAimButton{
+  height: 100%;
+  width:50%;
+  border:solid;
+  text-align:center;
+  font-size:1.3em;
+  font-family: "Anton",sans-serif;
+  padding-top: 10px;
+  float: left;
+  cursor: pointer;
+}
+.gameTutorialAndAimButton:hover{
+  color:white;
+  background-color: royalblue;
+  font-size: 1.4em;
+  border-color: royalblue;
+}
+.gameTutorialDiv{
+  height:80%;
+  width:80%;
+  margin-left: 10%;
+  background-image: url("tutorial1.png");
+  background-size: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.gameTutorialNext{
+  height: 100%;
+  width: 10%;
+  float: right;
+  font-size: 4em;
+  padding-top:200px;
+}
 /*After Level clear */
 .finalStatsWrapper{
   width:85%;
