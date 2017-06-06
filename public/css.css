@@ -337,7 +337,14 @@ div.avatarImageAndGameStatsWrapper{
   height : 90%;
   width : 90%;
 }
-
+.registrationPageInput{
+  width:30%;
+  font-family: "Anton",sans-serif;
+  color:royalblue;
+  border-radius: 0;
+  height: 7%;
+  font-size: 1.5em;
+}
 /*Classes for the gamepage*/
 .gameCanvasWrapper{
   height:410;
