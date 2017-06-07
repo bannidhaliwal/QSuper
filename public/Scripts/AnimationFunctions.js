@@ -1,7 +1,13 @@
 //This files contains the animation functions.
 //@author: Navjot Singh Dhaliwal
 
-//Function to swap the elements..
+/*
+  This function will swap the elements 
+  on the game canvas.
+  @param data: data received from the server
+  @param canvas : canvas of the game
+  @param imgArray : array that contains the images
+*/
 function SwapObjects(data,canvas,imgArray){
   var SOUTH = -10;
   var NORTH = 10;
@@ -63,13 +69,25 @@ function SwapObjects(data,canvas,imgArray){
   setTimeout(function(){clearInterval(interval);},120)
 }
 
-//This method will highlight the selected element.
+/*
+  This method will hightlight the element..
+  @param data: data from the server to highlight.
+  @param canvas : canvas of the game
+  @param img : image array to draw the image.
+  @param color : Color to use to highlight.
+*/
 function Highlight(data,canvas,img,color){
   DrawElements(canvas,GetXandYCoordinate(data.id).x,GetXandYCoordinate(data.id).y,0,0,img[data.element],color);
 }
 
-//Function to animate the movement of elements after the popping of the element
-function MoveElements(data,canvas,imgArray,socket){
+/*
+  This method will animate the moving tiles.
+  It will be called upon the poping of tiles.
+  @param data: data received from the server side
+  @param canvas : Canvas to draw game.
+  @param imgArray : Image array to draw the elements
+*/
+function MoveElements(data,canvas,imgArray){
   var LENGTH_OF_ONE_TILE = 50;
   var ONE_TILE_DOWN = -50;
   var firstElement = data.elementsToReposition[0].id;
@@ -106,7 +124,16 @@ function MoveElements(data,canvas,imgArray,socket){
   ,timeTakenForAnimation);
 }
 
-//Helper function to draw elements on the given x and y coordinates..
+/*
+  This function will draw the elements on the canvas.
+  @param canvas : Canvas to draw the game
+  @param x : x coordinate to draw
+  @param y : y Coordinate to draw
+  @param counterY: This is for swaping and moving funcitons.
+                   We will set this counter to move the tiles
+                   downwards.
+  @param counterX : To move the elements left or right
+*/
 function DrawElements(canvas,x,y,counterY,counterX,img,color){
     var LENGTH_OF_ONE_TILE = 50;
     var HEIGH_OF_ONE_TILE = 50;
@@ -118,18 +145,33 @@ function DrawElements(canvas,x,y,counterY,counterX,img,color){
     canvas.drawImage(img,coordinateX-counterX,coordinateY-counterY,LENGTH_OF_ONE_TILE,HEIGH_OF_ONE_TILE);
 }
 
-//Helper method get x and y coordinate from the id..
+/*
+  A element id consist its x and y values
+  which is used to layout the element on the 
+  canvas. This function returns x and y coords 
+  of the element.
+  @param id : id of the element. eg(41)
+*/
 function GetXandYCoordinate(id){
   id = ""+id;
   return {y : id[0],x : id[1]};
 }
 
-//This function will display the game over screen
+/*
+  Function to swap the divs on the gamepage
+  @param idToHide: div to hide
+  @param idToShow: div to show
+*/
 function SwapDivs(idToHide,idToShow){
   document.getElementById(idToHide).style.display = "none";
   document.getElementById(idToShow).style.display = "block";
 }
 
+/*
+  This function will draw the chart on the calculator page.
+  @param stats: stats from the calculation function
+  @param canvas : canvas to draw the calculator
+*/
 function DrawChart(stats,canvas){
   var WITH_SUPER = 1;
   var WITHOUT_SUPER = 0;
@@ -157,7 +199,11 @@ function DrawChart(stats,canvas){
     }
   });
 }
-
+/*
+  This function updates the progress bar on the
+  gamepage.
+  @param gameStats: Current stats of the game.
+*/
 function UpdateTheProgressBar(gameStats){
   var pr = document.getElementById('progressBar').getContext('2d');
   pr.fillStyle = "royalblue";
@@ -167,6 +213,16 @@ function UpdateTheProgressBar(gameStats){
   console.log(gameStats);
 }
 
+/*
+  This method here will destroy and insert the new canvas to draw the 
+  chart on the calculation page. There is a bug in the Chart.js lib 
+  which will not destroy the data of the old chart, hence the chart 
+  will flicker to the old data when hovered upon. To remove that bug,
+  I had to delete the canvas and create a new one.
+  @param callback : callback function to run after destroying and creating
+                    the new canvas. canvas would be passed to this funciton
+
+*/
 function DestroyAndInsertNewCanvasElement(callback){
   var parentOfCanvas = document.getElementById('canvasWrapper');
   var chartElement = document.getElementById('myChart');
@@ -180,7 +236,10 @@ function DestroyAndInsertNewCanvasElement(callback){
   parentOfCanvas.style.height = "500px";
   callback(newCanvas);
 }
-
+/*
+  This method will update the tuts.
+  @param direction: It is next or previous flag.
+*/
 function UpdateTut(direction){
   var gameTutorial = document.getElementById('gameTutorial');
   var currentTut = parseInt(document.getElementById('currentTut').innerHTML);

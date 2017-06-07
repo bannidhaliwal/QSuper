@@ -5,6 +5,8 @@
     <% include head.ejs %>
     <% var page = 'gamepage'%>
     <% var active = " active"%>
+    <script src = "/Scripts/AddEventListeners.js"></script>
+    <script src = "/Scripts/SocketEvents.js"></script>
   </head>
   <body>
     <% include header.ejs %>
@@ -144,145 +146,21 @@
   <script src = "/Scripts/Sounds.js"></script>
   <script src = "/Scripts/UpdateGameElements.js"></script>
   <script>
-
-      //Socket functions..
       var socket = io.connect();
+      /*
+        img array will be used to draw the images
+        on the canvas.
+      */
       var img = [document.getElementById("cash"),document.getElementById("balance"),document.getElementById("cocontribution"),
       document.getElementById("conservative"),document.getElementById("growth"),document.getElementById("salarysacrifice"),
       document.getElementById("empty")];
-      //Canvas for the functions..
+      //Canvas for the GAME..
       var canvas = document.getElementById("canvas").getContext("2d");
-      socket.emit("initializeGame",{email:"<%=locals.session.email%>"});
-      //This function will be invoked when the game ends
-      socket.on("GameWon",function(data){
-        console.log("Game Ended");
-        UpdateFinalStatsOfGame(data.levelData.score);
-        SwapDivs("GameContent","SuperInformation");
-      });
-
-      socket.on("GameLost",(data)=>{
-        SwapDivs("GameContent","GameLost");
-      });
-
-      socket.on("RefreshPage",(data)=>{
-        document.getElementById('refresh').click();
-      });
-      //Swap animation for the swapping elements..
-      socket.on("SwapAnimation",function(data){
-        SwapObjects(data,canvas,img);
-      });
-
-      //Highlight the selected item
-      socket.on("Highlight",function(data){
-        Highlight(data,canvas,img,"#33FFA5");
-      });
-
-      //Dehighlight the box
-      socket.on("Dehighlight",function(data){
-        Highlight(data,canvas,img,"white");
-      });
-
-      //Move the elements..
-      socket.on("MoveElements",function(data){
-        //Here we play the music after the tiles has been popped and before moving the tiles..
-        PlayMusic();
-        MoveElements(data,canvas,img);
-      });
-
-      //When Socket connects with server for first time,
-      //Server serves with gameBox array. With that array
-      //We draw on canvas.
-      socket.on("Game Initialized",function(data){
-        var array = data.array;
-        var HEIGHT_OF_CANVAS = 400;
-        var WIDTH_OF_CANVAS = 400;
-        canvas.clearRect(0, 0, WIDTH_OF_CANVAS,HEIGHT_OF_CANVAS);//clear the canvas before redrawing..
-        UpdateHTML(array);
-        for(var i = 0; i < array.length;i++){
-          if(array[i] !== null){
-            //Here we are choosing element from array img on the base of element of current box.
-            canvas.drawImage(img[array[i].element],array[i].xPosition,array[i].yPosition,array[i].height,array[i].width);
-          }
-        }//end For
-      }
-      );//end Socket.on
-      socket.on("Redraw",function(data){
-        var array = data.array;
-        var HEIGHT_OF_CANVAS = 400;
-        var WIDTH_OF_CANVAS = 400;
-        UpdateHTML(array);
-        canvas.clearRect(0, 0, WIDTH_OF_CANVAS,HEIGHT_OF_CANVAS);//clear the canvas before redrawing..
-        UpdateTheProgressBar(array[11]);
-        document.getElementById("score").innerHTML = array[11].score;
-        for(var i = 0; i < array.length;i++){
-          if(array[i] !== null){
-            //Here we are choosing element from array img on the base of element of current box.
-            canvas.drawImage(img[array[i].element],array[i].xPosition,array[i].yPosition,array[i].height,array[i].width);
-          }
-        }//end For
-      }
-      );
-
-      //we are adding the event listener to the canvas on click
-      var canvasPlane = document.getElementById("canvas");
-      canvasPlane.addEventListener('click',function() {
-        var canvas = document.getElementById("canvas");
-        var rectangleOnCanvas = canvas.getBoundingClientRect();
-        var xCoord = Math.round(event.clientX - rectangleOnCanvas.left);
-        var yCoord = Math.round(event.clientY - rectangleOnCanvas.top);
-        socket.emit("ClickedOnCanvas",{X : xCoord, Y : yCoord});
-      });
-      /*Add event listener to the input field*/
-      document.getElementById('superContribution').addEventListener('change',function(){
-        setTimeout(UpdateOnKeyPress,30);
-      });
       /*
-        Add the event listeners to the scores. When we click 
-        no super then we just emit the socket event with the 
-        0 % contribution and if we click on the contributed 
-        score then we emit the socket event with the value 
-        from the user inputted value. Error checking will be 
-        done on the server end. However, user will not be 
-        prompted because error cannot be done unless intentional
-        otherwise.
+        Emit the initializeGame event with current user if any..
       */
-      document.getElementById('totalScoreWithSuper').addEventListener('click',()=>{
-        var contribution = document.getElementById("superContribution").value;
-        contribution = parseInt(contribution);
-        if(contribution < 0 || contribution > 30){
-          contribution = 30;
-        }
-        setTimeout(()=>{
-          socket.emit("SaveData",{contribution : contribution});
-        },200);
-      });
-      document.getElementById('noSuperTotalScore').addEventListener('click',()=>{
-        setTimeout(()=>{
-          socket.emit("SaveData",{contribution : 0});
-        },200);
-        setTimeout(()=>{
-          document.getElementById('refresh').click();
-        },2000);
-      });
-
-      document.getElementById('gameTutorialButton').addEventListener('click',()=>{
-        document.getElementById('GameContent').style.display = "none";
-        document.getElementById('gameTutorial').style.display = "block";
-      });
-
-      document.getElementById('nextTut').addEventListener('click',()=>{
-        UpdateTut('next');
-      });
-
-      document.getElementById('previousTut').addEventListener('click',()=>{
-        UpdateTut('previous');
-      });
-
-      document.getElementById('backToGame').addEventListener('click',()=>{
-        document.getElementById('GameContent').style.display = "block";
-        document.getElementById('gameTutorial').style.display = "none";
-      });
-
-
+      socket.emit("initializeGame",{email:"<%=locals.session.email%>"});
+      SocketEventsForGamePage();
+      AddEventListenersForGamePage();
   </script>
 </html>
