@@ -180,3 +180,20 @@ function DestroyAndInsertNewCanvasElement(callback){
   parentOfCanvas.style.height = "500px";
   callback(newCanvas);
 }
+
+function UpdateTut(direction){
+  var gameTutorial = document.getElementById('gameTutorial');
+  var currentTut = parseInt(document.getElementById('currentTut').innerHTML);
+  if(direction == "next" && currentTut < 3){
+    var nextTut = (currentTut + 1);
+    nextTut = nextTut + "tut.png";
+    document.getElementById('currentTut').innerHTML = nextTut;
+    gameTutorial.style.backgroundImage = "url('"+nextTut+"')";
+  }
+  else if(direction == "previous" && currentTut > 1){
+    var previousTut = (currentTut - 1);
+    previousTut = previousTut + "tut.png";
+    document.getElementById('currentTut').innerHTML = previousTut;
+    gameTutorial.style.backgroundImage = "url('"+previousTut+"')";
+  }
+}

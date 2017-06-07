@@ -117,11 +117,13 @@
     </div>
     <div id = "gameTutorial" class = "gameTutorialDiv" style = "display:none">
       <div class = "gameTutorialNext">
-        <span style = "cursor:pointer;"> ></span>
+        <span style = "cursor:pointer;" id = "nextTut"> ></span>
       </div>
       <div class = "gameTutorialNext" style = "float:left;text-align:center;">
-        <span style = "cursor:pointer;"> < </span>
+        <span style = "cursor:pointer;" id = "previousTut"> < </span>
       </div>
+      <div id = "currentTut" style = "display:none">1</div>
+      <button id = "backToGame" type="button" class="btn-primary">Back To Game</button>
     </div>
     <a href = "/gamepage" id = "refresh" style = "display:none">
     <% include footer.ejs %>
@@ -267,5 +269,20 @@
         document.getElementById('GameContent').style.display = "none";
         document.getElementById('gameTutorial').style.display = "block";
       });
+
+      document.getElementById('nextTut').addEventListener('click',()=>{
+        UpdateTut('next');
+      });
+
+      document.getElementById('previousTut').addEventListener('click',()=>{
+        UpdateTut('previous');
+      });
+
+      document.getElementById('backToGame').addEventListener('click',()=>{
+        document.getElementById('GameContent').style.display = "block";
+        document.getElementById('gameTutorial').style.display = "none";
+      });
+
+
   </script>
 </html>

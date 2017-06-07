@@ -390,11 +390,11 @@ div.avatarImageAndGameStatsWrapper{
   border-color: royalblue;
 }
 .gameTutorialDiv{
-  height:80%;
+  height:70%;
   width:80%;
   margin-left: 10%;
-  background-image: url("tutorial1.png");
-  background-size: 50%;
+  background-image: url("1tut.png");
+  background-size: 60%;
   background-position: center;
   background-repeat: no-repeat;
 }
