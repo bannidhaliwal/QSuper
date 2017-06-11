@@ -6,8 +6,8 @@ Navjot Singh Dhaliwal, Kevin Joshua Ramos <br />
 ## Designing :
 Albert Makmur, Deblin Winata
 #TODO :
-4. Add the friend widget where a user can add friends. ->Future developments
-5. Live chat funcitonality. ->Future developements
-8. REFACTOR THE CODE.
+1. Add the friend widget where a user can add friends. ->Future developments
+2. Live chat funcitonality. ->Future developements
+3. REFACTOR THE CODE.
 
 Deadline : 20th of May 2017
