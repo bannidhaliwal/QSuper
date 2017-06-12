@@ -148,6 +148,11 @@ function CheckCalculatorInputsForErrors(){
     window.alert("You cannot sacrifice more than 30.5% of your salary into super per annum")
     return false;
   }
+  else if(CheckIfContributionGoAboveCapLimit(annualSalary,annualContribution)){
+    window.alert("The limit of contribution to super before tax is $30000 per annum.(Including 9.5%\
+    from your employer.)");
+    return false;
+  }
   else if(annualSalary < 1 || annualContribution < 1){
     window.alert('Invalid Input ');
     return false;
@@ -155,4 +160,14 @@ function CheckCalculatorInputsForErrors(){
 
   console.log(annualSalary);
   return true;
+}
+
+function CheckIfContributionGoAboveCapLimit(salary,contribution){
+  var superFromEmployer = salary * (95/100);
+  var totalContribution = contribution + superFromEmployer;
+  var cap = 30000;
+  if(totalContribution > cap){
+    return true;
+  }
+  return false;
 }
