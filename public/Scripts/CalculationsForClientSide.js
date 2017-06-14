@@ -35,7 +35,6 @@ function CalculateStats(salary,salarySacrifice,flagSalary,flagSalarySacrifice,ca
   //first contribution from employer
   superBalance[WITH_SUPER] = (salary * SUPER_CONTRIBUTION_EMPLOYER) + salarySacrifice;
   superBalance[WITHOUT_SUPER] = salary * SUPER_CONTRIBUTION_EMPLOYER;
-  console.log(superBalance);
   //Determine the taxable income
   taxableIncome[WITH_SUPER] = salary - salarySacrifice;
   taxableIncome[WITHOUT_SUPER] = salary;
@@ -45,7 +44,6 @@ function CalculateStats(salary,salarySacrifice,flagSalary,flagSalarySacrifice,ca
   medicareLevy[WITH_SUPER] = taxableIncome[WITH_SUPER] * MEDICARE_LEVY_PERCENTAGE;
   medicareLevy[WITHOUT_SUPER] = taxableIncome[WITHOUT_SUPER] * MEDICARE_LEVY_PERCENTAGE;
   superBalanceTax[WITH_SUPER] = salarySacrifice * SUPER_BALANCE_TAX;
-  console.log(superBalanceTax);
   superBalanceTax[WITHOUT_SUPER] = 0; //Because we havent made any contribution to the super..
   netSuperBalance[WITH_SUPER] = superBalance[WITH_SUPER] - superBalanceTax[WITH_SUPER];
   netSuperBalance[WITHOUT_SUPER] = superBalance[WITHOUT_SUPER] - superBalanceTax[WITHOUT_SUPER];
@@ -67,11 +65,12 @@ function CalculateStats(salary,salarySacrifice,flagSalary,flagSalarySacrifice,ca
       gainLoss:gainLoss,
       salarySacrifice:salarySacrifice
     };
-  console.log(stats);
   callback(stats,canvas);
+  console.log(stats);
 }
 
 function CalculateTax(taxableIncome){
+  console.log("taxable income is"+taxableIncome);
   var FIRST_SALARY_CASE = 18200;
   var SECOND_SALARY_CASE = 37000;
   var THIRD_SALARY_CASE = 87000;
@@ -86,7 +85,6 @@ function CalculateTax(taxableIncome){
   }
   else if(taxableIncome <= SECOND_SALARY_CASE){
     tax = (taxableIncome - FIRST_SALARY_CASE) * 0.19;
-    console.log(taxableIncome);
   }
   else if(taxableIncome <= THIRD_SALARY_CASE){
     tax = ((taxableIncome - SECOND_SALARY_CASE) * 0.325) + SECOND_SALARY_CASE_TAX;
@@ -144,6 +142,7 @@ function CheckCalculatorInputsForErrors(){
     annualContribution *= 12;
   }
   var MAXIMUM_SALARY_SACRIFICE = annualSalary * 0.305;
+  console.log(MAXIMUM_SALARY_SACRIFICE);
   if(annualContribution > MAXIMUM_SALARY_SACRIFICE){
     window.alert("You cannot sacrifice more than 30.5% of your salary into super per annum")
     return false;
@@ -158,12 +157,12 @@ function CheckCalculatorInputsForErrors(){
     return false;
   }
 
-  console.log(annualSalary);
   return true;
 }
 
 function CheckIfContributionGoAboveCapLimit(salary,contribution){
-  var superFromEmployer = salary * (95/100);
+  var superFromEmployer = Math.round(salary * 0.095);
+  console.log(superFromEmployer);
   var totalContribution = contribution + superFromEmployer;
   var cap = 30000;
   if(totalContribution > cap){
